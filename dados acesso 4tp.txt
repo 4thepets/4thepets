@@ -1,0 +1,28 @@
+000webhost (repositório/teste/homologação):
+usuario: contact.4thepets@gmail.com
+senha: 4thePets*1
+
+domain: http://4thepets.000webhostapp.com/
+
+BD [QAS]:
+driver: mysql
+host: localhost
+port: 3306
+schema: id5191601_qas_4tp_db
+usuario: id5191601_qas_4tp
+senha: qas4tp
+
+BD [DEV]: 
+driver: mysql
+host: localhost
+port: 3306
+schema: id5191601_dev_4tp_db
+usuario: id5191601_dev_4tp
+senha: dev4tp
+
+acesso ao sistema (a ser criado):
+usuario: 4tpadmin
+senha: 4thePets*1
+
+Requisitos mínimos:
+- Editor de texto (Sublime Text, Notepad ++)
