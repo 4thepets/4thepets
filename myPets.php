@@ -5,15 +5,16 @@
         $usuario = unserialize($_SESSION['USUARIO']);
     else
         header("location: index.php");
-    
-    if(isset($_GET['quit'])){
-        if($_GET['quit'] == true){
-            session_destroy();
-            header("location: index.php");            
-        }
+
+    if(isset($_GET['interested'])){
+        if($_GET['interested'] == "t")
+            $interestHandler = true;
+        else 
+            $interestHandler = false;
+    }else{
+        $interestHandler = false;
     }
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,15 +32,19 @@
                     <p>Bem vindo <?php $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
-                    <li><a href="myProfile.php">Meu Perfil</a></li>
+                    <?php 
+                        if($_SERVER['PHP_SELF'] != "/home.php") 
+                            echo "<li><a href='home.php'>Página Inicial</a></li>";
+                    ?>                   
+                    <li><a href='myProfile.php'>Meu Perfil</a></li>
                     <li><a href="myPets.php?interested=f">Meus Pets</a></li>
-                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
+                    <li><a href="myPets.php">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-                
+               
             </article>
         </section>
     </body>

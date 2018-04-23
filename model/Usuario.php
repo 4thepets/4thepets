@@ -18,20 +18,25 @@
         public static function efetuarCadastro($nomeUsuario, $emailUsuario, $senhaUsuario, $senhaConfirmacao){
             $emailUsuario = self::validarEmail($emailUsuario);
             $senhaUsuario = self::validarSenha($senhaUsuario, $senhaConfirmacao);
+            // TEMPORÁRIO 
+            $imagemUsuario = "images/sample/default.png";
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL  = " INSERT INTO ".$conn->getDbName().".TB_USUARIO (";
             $SQL .= " `NAME_USUARIO`,";
             $SQL .= " `NAME_EMAIL_USUARIO`,";
-            $SQL .= " `CODE_SENHA_USUARIO`)";
+            $SQL .= " `CODE_SENHA_USUARIO`,";
+            $SQL .= " `IMAG_USUARIO`)";
             $SQL .= " VALUES (";
             $SQL .= " :nomeUsuario,";
             $SQL .= " :emailUsuario,";
-            $SQL .= " :senhaUsuario);";
+            $SQL .= " :senhaUsuario,";
+            $SQL .= " :imagemUsuario);";
             $stmt = $conn->prepare($SQL);
             $stmt->bindParam(":nomeUsuario", $nomeUsuario);
             $stmt->bindParam(":emailUsuario", $emailUsuario);
             $stmt->bindParam(":senhaUsuario", $senhaUsuario);
+            $stmt->bindParam(":imagemUsuario", $imagemUsuario);
             if($stmt->execute())
                 return true;
             else
@@ -90,6 +95,10 @@
 
         public function getNome(){
             echo $this->nome;
+        }
+
+        public function getCaminhoImagem(){
+            echo $this->caminhoFoto;
         }
     }
 ?>

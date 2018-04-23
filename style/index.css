@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Kalam');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-size: 100%;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+/* INDEX CONTENT */
+.indexContent{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+
+.filterOpacity{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: #000;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.indexContent .menuContent{
+    font-family: 'Source Sans Pro';
+    width: 20vw;
+    height: 200vh;
+    position: absolute;
+    background: #013243;
+    transition: .30s ease;
+    font-size: 1.2rem;
+    color: #FFF;
+}
+
+.indexContent .menuContent .loginForm{
+    padding-top: 65%;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.indexContent .menuContent .registerForm{
+    padding-top: 10%;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.indexContent .menuContent .loginForm h1, .registerForm h1{
+    text-align: center;
+    line-height: 2rem;
+    font-size: 1.8rem;
+    padding: 1% 0 2% 0;
+}
+
+.indexContent .menuContent .loginForm h3, .registerForm h3{
+    text-align: center;
+    line-height: 2rem;
+    font-size: 1rem;
+    margin: 1% 3% 2% 3%;
+}
+
+.indexContent .menuContent form label{
+    margin: 5%;
+}
+
+.indexContent .menuContent form input[type="text"], input[type="email"], input[type="password"]{
+    width: 90%;
+    margin: 1% 5% 3% 5%;
+    position: relative;
+    font-family: 'Source Sans Pro';
+    font-size: 1em;
+    line-height: 1.5em;
+    text-indent: 2%;
+    border-radius: 2px;
+    border: 3px solid #FFF;
+}
+
+.indexContent .menuContent form input[type="submit"]{
+    padding: 1.5% 3%;
+    font-family: 'Source Sans Pro';
+    font-size: 0.875em;
+    margin: 1% 5% 1% 5%;
+    background: #013243;
+    border: 1px solid #FFF;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.indexContent .menuContent form input[type="submit"]:hover{
+    color: #013243;
+    background: #FFF;
+    transition: .20s ease-in-out;
+    cursor: pointer;
+}
+
+.indexContent .menuContent form a{
+    text-decoration: none;
+    color: #FFF;
+    font-size: 0.75em;
+}
+
+.indexContent .menuContent p{
+    font-size: 0.875em;
+    margin: 3% 5% 3% 5%;
+}
+
+.indexContent .menuContent p a{
+    color: #FFF;
+    font-weight: bold;
+}
+
+.indexContent .indexApresentationContent{
+    width: 80vw;
+    position: fixed;
+    margin-left: 20vw;
+}
+
+.indexContent .indexApresentationContent figure{
+    width: 100%;
+    margin: 10vh 0;
+    position: relative;
+}
+
+.indexContent .indexApresentationContent figure img{
+    width: 20%;
+    position: relative;
+    left: 50%;
+    margin-left: -10%;
+}
+
+.indexContent .indexApresentationContent figure figcaption{
+    width: 100%;
+    text-align: center;
+    font-family: 'Kalam';
+    color: #FFF;
+    font-size: 3rem;
+}
+
+.indexContent .indexApresentationContent figure p{
+    width: 100%;
+    text-align: center;
+    font-family: 'Kalam';
+    color: #FFF;
+    font-size: 1.8em;
+} 

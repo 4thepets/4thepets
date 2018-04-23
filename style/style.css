@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 16px;
+    background: #EEEEEE;
+}
+
+.homeContent{
+    width: 100vw;
+    position: absolute;
+}
+.homeContent .menuContent{
+    font-family: 'Source Sans Pro';
+    width: 20vw;
+    height: 100vh;
+    position: fixed;
+    background: #013243;
+    transition: .30s ease;
+    font-size: 1.2rem;
+}
+.homeContent .menuContent figure{
+    width: 100%;
+    position: relative;
+}
+.homeContent .menuContent figure img{
+    width: 70%;
+    margin: 15%;
+    position: relative;
+    border-radius: 1000px;
+}
+.homeContent .menuContent figure p { 
+    width: 100%;
+    position: relative;
+    color: #FFF;
+    text-align: center;
+}
+.homeContent .menuContent ul{
+    list-style: none;
+    display: block;
+    position: relative;
+    text-indent: 0.5em;
+    padding-top: 5vh;
+}
+.homeContent .menuContent ul li{
+    display: block;
+    line-height: 2em;
+}
+.homeContent .menuContent ul li a{
+    color: #FFF;
+    text-decoration: none;
+    display: block;
+}
+.homeContent .menuContent ul li a:hover{
+    background: #2C3E50;
+    transition: .30s ease;
+    border-right: 4px solid #FFF;
+}
+/* Page Content */
+.homeContent .pageContent{
+    width: 80vw;
+    margin-left: 20vw;
+}
