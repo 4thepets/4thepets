@@ -1,5 +1,6 @@
 <?php
 	include_once 'model/Usuario.php';
+	include_once 'enumeration/IndexMessagesEnum.php';
 	if(isset($_POST['userLogin'])){
 		try{
 			if($usuario = Usuario::efetuarAcesso($_POST['userEmail'], $_POST['userPassword'])){
@@ -45,7 +46,7 @@
         		$("#menuToggle").animate({top: '0'}, "slow");
 			});
 		});
-</script> 
+	</script> 
 	<body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
 		<div class="filterOpacity"></div>
 		<section class="indexContent">
@@ -81,7 +82,7 @@
 			<article class="indexApresentationContent">
 				<figure>
 					<img src="images/logo_4tp_white.png"/>
-					<figcaption>Porque não adotar um amigo hoje?</figcaption>
+					<figcaption><?php echo IndexMessagesEnum::getMessage(); ?></figcaption>
 					<p>Acesse nossa plataforma e faça novos amigos!</p>
 				</figure>	
 			</article>

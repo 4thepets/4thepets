@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Kalam');
 
 *{
     margin: 0;
@@ -8,13 +9,23 @@
 
 body{
     font-size: 16px;
-    background: #EEEEEE;
+    background-size: 100%;
+}
+
+.filterOpacity{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: #000;
+    opacity: 0.8;
+    z-index: -1;
 }
 
 .homeContent{
     width: 100vw;
     position: absolute;
 }
+
 .homeContent .menuContent{
     font-family: 'Source Sans Pro';
     width: 20vw;
@@ -24,22 +35,26 @@ body{
     transition: .30s ease;
     font-size: 1.2rem;
 }
+
 .homeContent .menuContent figure{
     width: 100%;
     position: relative;
 }
+
 .homeContent .menuContent figure img{
     width: 70%;
     margin: 15%;
     position: relative;
     border-radius: 1000px;
 }
+
 .homeContent .menuContent figure p { 
     width: 100%;
     position: relative;
     color: #FFF;
     text-align: center;
 }
+
 .homeContent .menuContent ul{
     list-style: none;
     display: block;
@@ -47,22 +62,101 @@ body{
     text-indent: 0.5em;
     padding-top: 5vh;
 }
+
 .homeContent .menuContent ul li{
     display: block;
     line-height: 2em;
 }
+
 .homeContent .menuContent ul li a{
     color: #FFF;
     text-decoration: none;
     display: block;
 }
+
 .homeContent .menuContent ul li a:hover{
     background: #2C3E50;
     transition: .30s ease;
     border-right: 4px solid #FFF;
 }
+
 /* Page Content */
 .homeContent .pageContent{
     width: 80vw;
+    height: 100vh;
     margin-left: 20vw;
+    position: relative;
+    overflow-y: scroll;
+}
+
+.homeContent .pageContent .pageContentApresentation{
+    position: relative;
+    margin: 0 0 1vh 0;
+}
+
+.homeContent .pageContentApresentation figure{
+    width: 100%;
+    margin: 10vh 0 5vh 0;
+    position: relative;
+}
+
+.homeContent .pageContentApresentation figure img{
+    width: 10%;
+    position: relative;
+    left: 50%;
+    margin-left: -5%;
+}
+
+.homeContent .pageContentApresentation figure figcaption{
+    text-align: center;
+    font-family: 'Source Sans Pro';
+    color: #FFF;
+    font-size: 2.7rem;
+}
+
+.homeContent .pageContentApresentation figure .indexApresentationSubtext{
+    text-align: center;
+    font-family: 'Source Sans Pro';
+    color: #FFF;
+    font-size: 1.3em;
+} 
+
+.homeContent .pageContentApresentation .readMore{
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.homeContent .pageContentApresentation .readMore a{
+    position: relative;
+    text-decoration: none;
+    padding: 1% 2%;
+    border: 1px solid #FFF;
+    color: #FFF;
+    background: transparent;
+    border-radius: 100px;
+    font-family: 'Source Sans Pro';
+}
+
+.homeContent .pageContentApresentation .readMore a:hover{
+    background: #FFF;
+    color: #013243;
+    transition: .15s ease-in;
+}
+
+.homeContent .pageContent .pageContentPets{
+    width: 100%;
+    position: relative;
+    background: #ECECEC;
+
+}
+.homeContent .pageContentPets figure{
+    width: 23%;
+    position: relative;
+    margin: 1%;
+}
+
+.homeContent .pageContentPets figure img{
+    width: 100%;
+    position: relative;
 }

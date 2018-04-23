@@ -23,7 +23,8 @@
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
-    <body>
+    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+		<div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
@@ -31,15 +32,37 @@
                     <p>Bem vindo <?php $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
+                    <?php 
+                        if($_SERVER['PHP_SELF'] != "/home.php") 
+                            echo "<li><a href='home.php'>Página Inicial</a></li>";
+                    ?>  
                     <li><a href="myProfile.php">Meu Perfil</a></li>
                     <li><a href="myPets.php?interested=f">Meus Pets</a></li>
                     <li><a href="myPets.php?interested=t">Pets interessados</a></li>
-                    <li><a href="home.php?quit=true">Sair</li>
+                    <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-                
+                <div class="pageContentApresentation">
+                    <figure>
+	    				<img src="images/logo_4tp_white.png"/>
+                        <figcaption>Onde os pets encontram uma família.</figcaption>
+                        <p class="indexApresentationSubtext">Muitos pets procuram um novo amigo. Um amigo que nem você.</p>
+                    </figure>
+                    <div class="readMore">
+                        <a href="#">Leia mais</a>
+                    </div>
+                </div>
+                <!--
+                <div class="pageContentPets">
+                    <h1>Conheça alguns amigos!</h1>
+                    <figure>
+                        <img src="images/bkg/01.jpg"/>
+                        <p>Leko, 15</p>
+                    </figure>
+                </div>
+                -->
             </article>
         </section>
     </body>
