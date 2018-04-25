@@ -28,14 +28,15 @@
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
-                    <li><a href="myPets.php?interested=f">Meus Pets</a></li>
+                    <li><a href="myPets.php">Meus Pets</a></li>
                     <li><a href="myPets.php?interested=t">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-                <h1>Minhas informações</h1><br/>
+                <h1>Minhas informações</h1>
+                <p>Atualizar as informações é sempre bem vindo.</p><br/>
                 <p><b>Alias: </b><?php echo $usuario->getNome(); ?><a href="tempProfileName.php"> Alterar Nome</a></p>
                 <p><b>Email: </b><?php echo $usuario->getEmail(); ?><a href="tempProfileEmail.php"> Alterar Email</a></p>
                 <b>Senha: </b><a href="tempProfilePassword.php"> Alterar Senha</a>

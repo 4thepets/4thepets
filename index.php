@@ -1,6 +1,10 @@
 <?php
 	include_once 'model/Usuario.php';
 	include_once 'enumeration/IndexMessagesEnum.php';
+	session_start();
+	if(isset($_SESSION['USUARIO']))
+		session_destroy();
+		
 	if(isset($_POST['userLogin'])){
 		try{
 			if($usuario = Usuario::efetuarAcesso($_POST['userEmail'], $_POST['userPassword'])){

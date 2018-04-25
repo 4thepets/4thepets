@@ -37,14 +37,23 @@
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
-                    <li><a href="myPets.php?interested=f">Meus Pets</a></li>
-                    <li><a href="myPets.php">Pets interessados</a></li>
+                    <li><a href="myPets.php">Meus Pets</a></li>
+                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-               
+            <?php if(!$interestHandler){ ?>
+                <h1>Meus pets</h1>
+                <p>Nada melhor do que prestigiar seus filhinhos.</p><br/>
+                <a href="addPet.php">Adicionar um animal para adoção</a>
+            <?php }else{ ?>
+                <h1>Meu interesse em pets</h1>
+                <p>Esta página encontra-se em processo de construção.</p>
+                <p>Desculpe-nos pelo transtorno.</p>
+                <a href="home.php">Voltar</a>
+            <?php } ?>
             </article>
         </section>
     </body>

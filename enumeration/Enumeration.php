@@ -2,7 +2,7 @@
     abstract Class Enumeration {
         private static $constantCacheArray = NULL;
         
-        private static function getConstants(){
+        public static function getConstants(){
             if(self::$constantCacheArray == NULL){
                 self::$constantCacheArray = [];
             }

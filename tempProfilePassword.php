@@ -38,8 +38,8 @@
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
-                    <li><a href="myPets.php?interested=f">Meus Pets</a></li>
-                    <li><a href="myPets.php">Pets interessados</a></li>
+                    <li><a href="myPets.php">Meus Pets</a></li>
+                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>

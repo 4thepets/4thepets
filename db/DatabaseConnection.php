@@ -4,14 +4,13 @@
 	Class DatabaseConnection extends PDO{
 		private $dbName;
 		
-		public function __construct($file = 'settings.ini'){	//Para alterar alguma informação, acesse
-			/*
+		public function __construct($file = 'settings.ini'){	//Para alterar alguma informação, acess
 			if(AppConfig::AMBIENTE_QAS){						//o arquivo de configuração "settings.ini".
 				$db = 'QAS';
 			}else{
 				$db = 'DEV';
-			}*/
-			$db = 'LOCAL';
+			}
+			//$db = 'LOCAL';
 			if(!$settings = parse_ini_file($file, TRUE))
 				throw new Exception('Não foi possível abrir o arquivo '.$file.'.');
 			$this->dbName = $settings[$db]['schema'];	
