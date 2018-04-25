@@ -9,7 +9,7 @@
         private $email;
     
         public function __construct($code, $nome, $email, $caminhoFoto){
-            $this->code = $code;
+            parent::__construct($code);
             $this->nome = $nome;
             $this->email = $email;
             $this->caminhoFoto = $caminhoFoto;
@@ -93,12 +93,56 @@
             }   
         }
 
+        public function alterarNome($nome){
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NAME_USUARIO = :nome WHERE CODE_USUARIO = :userId";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam("nome", $nome);
+            $stmt->bindParam("userId", $this->code);
+            if($stmt->execute()){
+                $this->nome = $nome;
+                return true;
+            }else
+                throw new Exception(ExceptionTypeEnum::ERRO_NOME_INVALIDO);
+        }
+
+        public function alterarEmail($email){
+            $email = self::validarEmail($email);
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NAME_EMAIL_USUARIO = :email WHERE CODE_USUARIO = :userId";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam("email", $email);
+            $stmt->bindParam("userId", $this->code);
+            if($stmt->execute()){
+                $this->email = $email;
+                return true;
+            }
+        }
+
+        public function alterarSenha($senha, $senhaConfirmacao){
+            $senha = self::validarSenha($senha, $senhaConfirmacao);
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET CODE_SENHA_USUARIO = :senha WHERE CODE_USUARIO = :userId";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam("senha", $senha);
+            $stmt->bindParam("userId", $this->code);
+            if($stmt->execute())
+                return true;
+        }
+
         public function getNome(){
-            echo $this->nome;
+            return $this->nome;
         }
 
         public function getCaminhoImagem(){
-            echo $this->caminhoFoto;
+            return $this->caminhoFoto;
+        }
+
+        public function getEmail(){
+            return $this->email;
         }
     }
 ?>

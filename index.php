@@ -84,7 +84,10 @@
 					<img src="images/logo_4tp_white.png"/>
 					<figcaption><?php echo IndexMessagesEnum::getMessage(); ?></figcaption>
 					<p>Acesse nossa plataforma e faça novos amigos!</p>
-				</figure>	
+				</figure>				
+                <div class="readMore">
+                    <a href="#">Leia mais</a>
+                </div>
 			</article>
 		</section>
 	</body>

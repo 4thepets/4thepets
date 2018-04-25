@@ -19,8 +19,8 @@
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
-                    <img src="<?php $usuario->getCaminhoImagem(); ?>"/>
-                    <p>Bem vindo <?php $usuario->getNome(); ?>!</p>
+                    <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
+                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
@@ -30,12 +30,15 @@
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
                     <li><a href="myPets.php?interested=f">Meus Pets</a></li>
                     <li><a href="myPets.php?interested=t">Pets interessados</a></li>
-                    <li><a href="home.php?quit=true">Sair</li>
+                    <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-               
+                <h1>Minhas informações</h1><br/>
+                <p><b>Alias: </b><?php echo $usuario->getNome(); ?><a href="tempProfileName.php"> Alterar Nome</a></p>
+                <p><b>Email: </b><?php echo $usuario->getEmail(); ?><a href="tempProfileEmail.php"> Alterar Email</a></p>
+                <b>Senha: </b><a href="tempProfilePassword.php"> Alterar Senha</a>
             </article>
         </section>
     </body>

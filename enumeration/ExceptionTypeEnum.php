@@ -2,6 +2,7 @@
     include_once "Enumeration.php";
     Class ExceptionTypeEnum extends Enumeration {
         const ERRO_DADOS_INCORRETOS_LOGIN = "Usuário ou senha incorretos.";
+        const ERRO_NOME_INVALIDO = "O nome fornecido é inválido. Por favor, insira um nome válido.";
         const ERRO_EMAIL_CADASTRO = "O email digitado é invalido. Por favor, insira um email válido.";
         const ERRO_EMAIL_NULO_CADASTRO = "O campo email encontra-se nulo. Por favor, digite um email válido.";
         const ERRO_EMAIL_EXISTENTE_CADASTRO = "Já existe uma conta com este email cadastrado.";

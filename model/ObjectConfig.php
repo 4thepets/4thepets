@@ -1,7 +1,11 @@
 <?php
     abstract Class ObjectConfig{
-        private $code;
+        protected $code;
         
+        public function __construct($code){
+            $this->code = $code;
+        }
+
         //Transforma booleano em 0 ou 1 (MySQL)
         public static function toTinyInt($bool){
             if($bool) 

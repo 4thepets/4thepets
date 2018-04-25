@@ -1,19 +1,20 @@
 <?php
-    include_once "model/Usuario.php";
+	include_once "model/Usuario.php";
     session_start();
     if($_SESSION['USUARIO'])
         $usuario = unserialize($_SESSION['USUARIO']);
     else
         header("location: index.php");
-
-    if(isset($_GET['interested'])){
-        if($_GET['interested'] == "t")
-            $interestHandler = true;
-        else 
-            $interestHandler = false;
-    }else{
-        $interestHandler = false;
+        
+    if(isset($_POST['tempChangePassword'])){
+        try{
+            if($usuario->alterarSenha($_POST['tempPassword'], $_POST['tempPasswordConfirm']))
+                $STATUS_MESSAGE = "Sucesso";
+        }catch(Exception $e){
+            $STATUS_MESSAGE = $e->getMessage();
+        }    
     }
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,14 +23,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
-        <title>4thePets - Juntando grandes amigos</title>
+        <title>Alterar Senha</title>
     </head>
     <body>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
+                   <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
@@ -44,7 +45,17 @@
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-               
+                <?php
+                    if(isset($STATUS_MESSAGE))
+                        echo $STATUS_MESSAGE;
+                ?>
+               	<form method="post">
+               		<label for="tempPassword">Alterar Senha</label>
+               		<input type="password" name="tempPassword" required placeholder="Digite uma nova senha."/><br/>
+                    <label for="tempPassword">Confirme a Senha</label>
+                    <input type="password" name="tempPasswordConfirm" required placeholder="Digite sua senha novamente."/>
+               		<input type="submit" name="tempChangePassword" value="Alterar Senha"/>
+               	</form>
             </article>
         </section>
     </body>

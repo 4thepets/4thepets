@@ -28,8 +28,8 @@
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
-                    <img src="<?php $usuario->getCaminhoImagem(); ?>"/>
-                    <p>Bem vindo <?php $usuario->getNome(); ?>!</p>
+                    <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
+                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
