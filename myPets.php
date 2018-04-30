@@ -22,9 +22,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
+        <link rel="stylesheet" type="text/css" href="style/myPets.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
-    <body>
+    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+        <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
@@ -44,7 +46,7 @@
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-            <?php if(!$interestHandler){ ?>
+                <?php if(!$interestHandler){ ?>
                 <h1>Meus pets</h1>
                 <p>Nada melhor do que prestigiar seus filhinhos.</p><br/>
                 <a href="addPet.php">Adicionar um animal para adoção</a>

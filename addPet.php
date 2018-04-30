@@ -17,7 +17,8 @@
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
-    <body>
+    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+        <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>

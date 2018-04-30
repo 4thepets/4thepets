@@ -15,7 +15,8 @@
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
-    <body>
+    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+        <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
@@ -37,8 +38,8 @@
             <article class="pageContent">
                 <h1>Minhas informações</h1>
                 <p>Atualizar as informações é sempre bem vindo.</p><br/>
-                <p><b>Alias: </b><?php echo $usuario->getNome(); ?><a href="tempProfileName.php"> Alterar Nome</a></p>
-                <p><b>Email: </b><?php echo $usuario->getEmail(); ?><a href="tempProfileEmail.php"> Alterar Email</a></p>
+                <p><b>Alias: </b>Marjorie<a href="tempProfileName.php"> Alterar Nome</a></p>
+                <p><b>Email: </b>teste<a href="tempProfileEmail.php"> Alterar Email</a></p>
                 <b>Senha: </b><a href="tempProfilePassword.php"> Alterar Senha</a>
             </article>
         </section>

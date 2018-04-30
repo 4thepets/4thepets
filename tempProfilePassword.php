@@ -25,7 +25,8 @@
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
         <title>Alterar Senha</title>
     </head>
-    <body>
+    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+        <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
