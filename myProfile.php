@@ -39,7 +39,7 @@
             <!-- Page Content -->
             <article class="pageContent">
                 <div class="pageorg">
-                    <img class="img"   src="images/logo_4tp_white.png"/>
+                    <img class="img"   src="images/logo_4tp_white.png" />
                     <h1 class="title">Minhas informações</h1>
                     <p class="subtitle">Atualizar as informações é sempre bem vindo.</p><br/><br><br>
                     <p class="subsubtitle"><b>Alias: </b> Marjorie  <br> <br>  <a href="tempProfileName.php" class="botao"> Alterar Nome</a></p> <br><br>
