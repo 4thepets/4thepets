@@ -25,7 +25,21 @@
         public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $sexoAnimal, $idadeAnimal, $isCastrado, $caminhoFoto){
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $SQL = "INSERT INTO TB_PET_ADICIONADO_ADOCAO_USUARIO"
+            $SQL  = "INSERT INTO ".$conn.getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO (";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $SQL .= "";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam();
         }
 
         public static function pesquisarPets($params, $interesse){

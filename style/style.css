@@ -91,7 +91,7 @@ body{
 
 .homeContent .pageContent .pageContentApresentation{
     position: relative;
-    margin: 0 0 1vh 0;
+    margin: 0 0 10vh 0;
 }
 
 .homeContent .pageContentApresentation figure{
@@ -147,17 +147,38 @@ body{
 .homeContent .pageContent .pageContentPets{
     width: 100%;
     position: relative;
-    background: #ECECEC;
-
+    margin: 0 auto;
+    text-align: center;
 }
-.homeContent .pageContentPets figure{
+
+.pageContentPets h1{
+    color: #FFF;
+    font-family: 'Source Sans Pro';
+    font-size: 2em;
+    line-height: 2em;
+}
+
+.homeContent .pageContentPets .card{
     width: 23%;
-    position: relative;
-    margin: 1%;
+    margin: 0 1% 2% 1%;
+    background: #013243;
+    border-radius: 5px;
+    display: block;
+    cursor: pointer;
 }
 
-.homeContent .pageContentPets figure img{
+.homeContent .pageContentPets .card img{
     width: 100%;
-    position: relative;
+    margin: 0;
 }
 
+.homeContent .pageContentPets .card p{
+    width: 100%;
+    font-family: 'Source Sans Pro';
+    font-size: 1.3em;
+    color: #FFF;
+}
+
+.clear{
+    clear: both;
+}

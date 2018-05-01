@@ -23,6 +23,10 @@
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
+    
+    <script src="https://npmcdn.com/minigrid@3.0.1/dist/minigrid.min.js"></script>
+    <script src="js/script.js"></script>
+
     <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
 		<div class="filterOpacity"></div>
         <section class="homeContent">
@@ -54,15 +58,46 @@
                         <a href="#">Leia mais</a>
                     </div>
                 </div>
-                <!--
                 <div class="pageContentPets">
                     <h1>Conheça alguns amigos!</h1>
-                    <figure>
+                    <div class="card">
                         <img src="images/bkg/01.jpg"/>
                         <p>Leko, 15</p>
-                    </figure>
+                    </div>
+                    <div class="card">
+                        <img src="images/bkg/02.jpg"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="card">
+                        <img src="images/bkg/03.jpg"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="card">
+                        <img src="images/sample/default.png"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="card">
+                        <img src="images/bkg/01.jpg"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="card">
+                        <img src="images/sample/default.png"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="card">
+                        <img src="images/sample/default.png"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="card">
+                        <img src="images/bkg/01.jpg"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="card">
+                        <img src="images/bkg/01.jpg"/>
+                        <p>Leko, 15</p>
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                -->
             </article>
         </section>
     </body>
