@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
-        <link rel="stylesheet" type="text/css" href="style/myPets.css"/>
+        <link rel="stylesheet" type="text/css" href="style/myPetss.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
     <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
@@ -38,13 +38,15 @@
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-                <h1>Meus pets</h1>
-                <p>Nada melhor do que prestigiar seus filhinhos.</p><br/>
-                <h1>Adicionando um pet</h1>
+                <div class="pageorg">
+                    <img  src="images/logo_4tp_white.png" class="img"/><br>
+                <h1 class="title">Meus pets</h1>
+                <p class="subtitle">Nada melhor do que prestigiar seus filhinhos.</p><br/><br/>
+                <h1 class="title">Adicionando um pet</h1><br>
                 <form method="post">
-                    <label for="animalName">Digite o nome do animal de estimação.</label>
-                    <input type="text" name="animalName" required placeholder="Digite um nome."/><br/>
-                    <label for="animalCategory">Selecione a categoria.</label>
+                    <label for="animalName" class="subtitle">Digite o nome do animal de estimação.</label><br>
+                    <input type="text" name="animalName" required placeholder="Digite um nome."/><br/><br>
+                    <label for="animalCategory" class="subtitle">Selecione a categoria.</label><br>
                     <select name="animalCategory" required>
                         <option>...</option>
                         <?php
@@ -52,17 +54,18 @@
                                 echo "<option value=".$categoria.">".$categoria."</option>";
                             }
                         ?>
-                    </select><br/>
-                    <label for="animalGender">Selecione o Gênero</label>
-                    <input type="radio" name="animalGender" value="Macho" required/>Macho
-                    <input type="radio" name="animalGender" value="Femea" required/>Fêmea<br/>
-                    <label for="animalAge">Digite a idade</label>
-                    <input type="number" name="animalAge" required/><br/>
-                    <label for="animalCast">Ele é castrado?</label>
-                    <input type="radio" name="animalCast" value="yes" required/>Sim
-                    <input type="radio" name="animalGender" value="no" required/>Não<br/>
-                    <input type="submit" name="animalRegister" value="Registrar meu pet"/>
+                    </select><br/><br>
+                    <label for="animalGender" class="subtitle">Selecione o Gênero</label><br>
+                    <input type="radio" name="animalGender" value="Macho" required class="option-input"/>Macho <p></p><br>
+                    <input type="radio" name="animalGender" value="Femea" required class="option-input"/>Fêmea<br/><br><br>
+                    <label for="animalAge" class="subtitle">Digite a idade</label><br>
+                    <input type="number" name="animalAge" required/><br/><br>
+                    <label for="animalCast" class="subtitle">Ele é castrado?</label><br>
+                    <input type="radio" name="animalCast" value="yes" required class="option-input"/>Sim <p></p><br>
+                    <input type="radio" name="animalCast" value="no" required class="option-input"/>Não<br/><br><br>
+                    <input type="submit" name="animalRegister" value="Registrar meu pet" class="botao"/><br><br><br>
                 </form>
+                </div>
             </article>
         </section>
     </body>
