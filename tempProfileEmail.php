@@ -59,7 +59,7 @@
                	<form method="post">
                		<label for="tempEmail" class="title">Alterar Email</label><br><br><br>
                		<input type="email" name="tempEmail" required placeholder="Digite um novo email"/><br><br>
-               		<a href="#"> <input type="submit" name="tempChangeEmail" value="Alterar Email" class="botao"/>  </a>
+               		<input type="submit" name="tempChangeEmail" value="Alterar Email" class="botao"/> 
                	</form>                
             </article>
             </div>

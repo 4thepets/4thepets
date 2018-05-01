@@ -14,6 +14,11 @@
     position: relative;
 }
 
+img:hover {
+    -webkit-transform: scaleX(-1.1);
+    transform: scaleX(-1.1);
+}
+
 .title{
 	font-family: 'Source Sans Pro';
 	color: #FFF;
