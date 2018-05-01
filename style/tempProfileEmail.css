@@ -1,20 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
-
 .pageorg{
 
 	width: 100%;	
     position: relative;
-   margin-top: 66px;
+    margin-top: 66px;
 	text-align: center;	
 	color: #FFF;
-    }
+}
 
 .img{ 
 	width: 10%;
     position: relative;
 }
-
 
 .title{
 	font-family: 'Source Sans Pro';
@@ -22,25 +20,6 @@
     font-size: 2.7em;
     font-weight: normal;
 }
-
-.subtitle{
-
-	font-family: 'Source Sans Pro';
-	color: #FFF;
-    font-size: 1.3em;
-    font-weight: normal;
-}
-
-.subsubtitle{
-
-	font-family: 'Source Sans Pro';
-	color: #FFF;
-    font-size: 1.2em;
-    font-weight: normal;
-     word-spacing: 5px;
-   }
-
-
 
 .botao {
 
@@ -55,17 +34,20 @@
     border-radius: 100px;
     font-family: 'Source Sans Pro';
     font-size: 0.9em;
+
 }
 
-a:hover{
-
-	background: #FFF;
+input[type=submit]:hover {
+    background: #FFF;
     color: #013243;
     transition: .15s ease-in;
-
 }
 
-/*
-@import url('https://fonts.googleapis.com/css?family=Kalam');
-
-*/
+input[type=email] {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 4px;
+}

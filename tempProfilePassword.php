@@ -23,6 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
+         <link rel="stylesheet" type="text/css" href="style/tempProfilePassword.css"/>
         <title>Alterar Senha</title>
     </head>
     <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
@@ -46,17 +47,20 @@
             </article>
             <!-- Page Content -->
             <article class="pageContent">
+                <div class="pageorg">
+                    <img class="img"   src="images/logo_4tp_white.png"/><br>
                 <?php
                     if(isset($STATUS_MESSAGE))
                         echo $STATUS_MESSAGE;
                 ?>
                	<form method="post">
-               		<label for="tempPassword">Alterar Senha</label>
-               		<input type="password" name="tempPassword" required placeholder="Digite uma nova senha."/><br/>
-                    <label for="tempPassword">Confirme a Senha</label>
-                    <input type="password" name="tempPasswordConfirm" required placeholder="Digite sua senha novamente."/>
-               		<input type="submit" name="tempChangePassword" value="Alterar Senha"/>
+               		<label for="tempPassword" class="title">Alterar Senha</label><br><br>
+               		<input type="password" name="tempPassword" required placeholder="Digite uma nova senha."/><br/><br><br><br>
+                    <label for="tempPassword" class="title">Confirme a Senha</label><br><br>
+                    <input type="password" name="tempPasswordConfirm" required placeholder="Digite sua senha novamente."/><br><br>
+               		<input type="submit" name="tempChangePassword" value="Alterar Senha" class="botao"/>
                	</form>
+                </div>
             </article>
         </section>
     </body>

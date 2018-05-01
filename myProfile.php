@@ -42,7 +42,7 @@
                     <img class="img"   src="images/logo_4tp_white.png"/>
                     <h1 class="title">Minhas informações</h1>
                     <p class="subtitle">Atualizar as informações é sempre bem vindo.</p><br/><br><br>
-                    <p class="subsubtitle"><b>Alias: </b> Marjorie  <br> <br>  <a href="tempProfileName.php" class="botao" class="b"> Alterar Nome</a></p> <br><br>
+                    <p class="subsubtitle"><b>Alias: </b> Marjorie  <br> <br>  <a href="tempProfileName.php" class="botao"> Alterar Nome</a></p> <br><br>
                     <p class="subsubtitle"><b>Email: </b> teste   <br> <br>  <a href="tempProfileEmail.php" class="botao"> Alterar Email</a></p><br><br>
                     <p class="subsubtitle"><b>Senha: </b>   <br><br><a href="tempProfilePassword.php" class="botao"> Alterar Senha</a><p><br>
                 </div>

@@ -24,6 +24,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
+         <link rel="stylesheet" type="text/css" href="style/tempProfileEmail.css"/>
+
         <title>Alterar Email</title>
     </head>
     <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
@@ -47,16 +49,20 @@
             </article>
             <!-- Page Content -->
             <article class="pageContent">
+                <div class="pageorg">
+                    <img class="img"   src="images/logo_4tp_white.png"/><br>
                 <?php
                     if(isset($STATUS_MESSAGE))
                         echo $STATUS_MESSAGE;
                 ?>
+                
                	<form method="post">
-               		<label for="tempEmail">Alterar Email</label>
-               		<input type="email" name="tempEmail" required placeholder="Digite um novo email"/>
-               		<input type="submit" name="tempChangeEmail" value="Alterar Email"/>
-               	</form>
+               		<label for="tempEmail" class="title">Alterar Email</label><br><br><br>
+               		<input type="email" name="tempEmail" required placeholder="Digite um novo email"/><br><br>
+               		<a href="#"> <input type="submit" name="tempChangeEmail" value="Alterar Email" class="botao"/>  </a>
+               	</form>                
             </article>
+            </div>
         </section>
     </body>
 </html>

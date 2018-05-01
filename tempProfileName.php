@@ -24,6 +24,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
+        <link rel="stylesheet" type="text/css" href="style/tempProfileName.css"/>
         <title>Alterar Nome</title>
     </head>
     <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
@@ -47,15 +48,18 @@
             </article>
             <!-- Page Content -->
             <article class="pageContent">
+                <div class="pageorg">
+                     <img class="img"   src="images/logo_4tp_white.png"/><br>
                 <?php
                     if(isset($STATUS_MESSAGE))
                         echo $STATUS_MESSAGE;
                 ?>
                	<form method="post">
-               		<label for="tempName">Alterar Nome</label>
-               		<input type="text" name="tempName" required placeholder="Digite um novo nome"/>
-               		<input type="submit" name="tempChangeName" value="Alterar Nome"/>
+               		<label for="tempName" class="title">Alterar Nome</label><br><br><br>
+               		<input type="text" name="tempName" required placeholder="Digite um novo nome"/><br><br>
+               		<input type="submit" name="tempChangeName" value="Alterar Nome" class="botao"/>
                	</form>
+               </div>
             </article>
         </section>
     </body>
