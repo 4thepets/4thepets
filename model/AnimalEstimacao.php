@@ -23,7 +23,9 @@
         }
 
         public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $sexoAnimal, $idadeAnimal, $isCastrado, $caminhoFoto){
-
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = "INSERT INTO TB_PET_ADICIONADO_ADOCAO_USUARIO"
         }
 
         public static function pesquisarPets($params, $interesse){

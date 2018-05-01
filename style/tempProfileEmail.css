@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 .pageorg{
-
 	width: 100%;	
     position: relative;
     margin-top: 66px;
@@ -14,9 +13,6 @@
     position: relative;
 }
 
-
-
-
 .title{
 	font-family: 'Source Sans Pro';
 	color: #FFF;
@@ -24,8 +20,13 @@
     font-weight: normal;
 }
 
-.botao {
+.subtitle{
+    line-height: 2em;
+    font-family: 'Source Sans Pro';    
+    font-size: 1.3em;
+}
 
+.botao {
 	color: #013243;
     transition: .15s ease-in;
     position: relative;
@@ -37,20 +38,25 @@
     border-radius: 100px;
     font-family: 'Source Sans Pro';
     font-size: 0.9em;
-
 }
 
-input[type=submit]:hover {
+.botao:hover {
     background: #FFF;
     color: #013243;
     transition: .15s ease-in;
+    cursor: pointer;
 }
 
 input[type=email] {
-    width: 20%;
+    width: 50%;
+    margin: 3% 0 0 0;
     padding: 12px 20px;
-    margin: 8px 0;
     box-sizing: border-box;
     border: 2px solid white;
+    font-family: 'Source Sans Pro';
+    font-size: 1.5em;
+    text-align: center;
+    color: #FFF;
     border-radius: 4px;
+    background: transparent;
 }

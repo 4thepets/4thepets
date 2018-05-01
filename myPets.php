@@ -1,19 +1,11 @@
 <?php
     include_once "model/Usuario.php";
+    include_once "enumeration/CategoriaEnum.php";
     session_start();
     if($_SESSION['USUARIO'])
         $usuario = unserialize($_SESSION['USUARIO']);
     else
         header("location: index.php");
-
-    if(isset($_GET['interested'])){
-        if($_GET['interested'] == "t")
-            $interestHandler = true;
-        else 
-            $interestHandler = false;
-    }else{
-        $interestHandler = false;
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,22 +32,37 @@
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
-                <?php if(!$interestHandler){ ?>
                 <h1>Meus pets</h1>
                 <p>Nada melhor do que prestigiar seus filhinhos.</p><br/>
-                <a href="addPet.php">Adicionar um animal para adoção</a>
-            <?php }else{ ?>
-                <h1>Meu interesse em pets</h1>
-                <p>Esta página encontra-se em processo de construção.</p>
-                <p>Desculpe-nos pelo transtorno.</p>
-                <a href="home.php">Voltar</a>
-            <?php } ?>
+                <h1>Adicionando um pet</h1>
+                <form method="post">
+                    <label for="animalName">Digite o nome do animal de estimação.</label>
+                    <input type="text" name="animalName" required placeholder="Digite um nome."/><br/>
+                    <label for="animalCategory">Selecione a categoria.</label>
+                    <select name="animalCategory" required>
+                        <option>...</option>
+                        <?php
+                            foreach (CategoriaEnum::getConstants() as $categoria) {
+                                echo "<option value=".$categoria.">".$categoria."</option>";
+                            }
+                        ?>
+                    </select><br/>
+                    <label for="animalGender">Selecione o Gênero</label>
+                    <input type="radio" name="animalGender" value="Macho" required/>Macho
+                    <input type="radio" name="animalGender" value="Femea" required/>Fêmea<br/>
+                    <label for="animalAge">Digite a idade</label>
+                    <input type="number" name="animalAge" required/><br/>
+                    <label for="animalCast">Ele é castrado?</label>
+                    <input type="radio" name="animalCast" value="yes" required/>Sim
+                    <input type="radio" name="animalGender" value="no" required/>Não<br/>
+                    <input type="submit" name="animalRegister" value="Registrar meu pet"/>
+                </form>
             </article>
         </section>
     </body>

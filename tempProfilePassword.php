@@ -41,23 +41,25 @@
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
                 <div class="pageorg">
-                    <img class="img"   src="images/logo_4tp_white.png"/><br>
-                <?php
-                    if(isset($STATUS_MESSAGE))
-                        echo $STATUS_MESSAGE;
-                ?>
+                    <img class="img" src="images/logo_4tp_white.png"/><br>
                	<form method="post">
-               		<label for="tempPassword" class="title">Alterar Senha</label><br><br>
-               		<input type="password" name="tempPassword" required placeholder="Digite uma nova senha."/><br/><br><br><br>
-                    <label for="tempPassword" class="title">Confirme a Senha</label><br><br>
-                    <input type="password" name="tempPasswordConfirm" required placeholder="Digite sua senha novamente."/><br><br>
+                       <?php
+                            if(isset($STATUS_MESSAGE))
+                                echo "<label for='tempPassword' class='title'>".$STATUS_MESSAGE."</label>";
+                            else
+                                echo "<label for='tempPassword' class='title'>Alterar Senha</label>";
+                        ?>
+                    <br/><label for="password" class="subtitle">Digite uma nova senha.</label><br/>
+               		<input type="password" name="tempPassword" required/><br/>
+                    <label for="tempPassword" class="subtitle">Digite novamente sua senha.</label><br/>
+                    <input type="password" name="tempPasswordConfirm" required/><br/>
                		<input type="submit" name="tempChangePassword" value="Alterar Senha" class="botao"/>
                	</form>
                 </div>

@@ -1,15 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
-
-
 .pageorg{
-
 	width: 100%;	
     position: relative;
-   margin-top: 66px;
+    margin-top: 66px;
+    margin-bottom: 40px;
 	text-align: center;	
 	color: #FFF;
-    }
+}
 
 .img{ 
 	width: 10%;
@@ -24,7 +20,6 @@
 }
 
 .subtitle{
-
 	font-family: 'Source Sans Pro';
 	color: #FFF;
     font-size: 1.3em;
@@ -32,54 +27,28 @@
 }
 
 .subsubtitle{
-
 	font-family: 'Source Sans Pro';
 	color: #FFF;
     font-size: 1.2em;
     font-weight: normal;
-     word-spacing: 5px;
-   }
-
-
+}
 
 .botao {
-
 	color: #013243;
     transition: .15s ease-in;
     position: relative;
     text-decoration: none;
-    padding: 0.6% 1%;
+    padding: 0.8% 1%;
     border: 1px solid #FFF;
     color: #FFF;
     background: transparent;
-    border-radius: 100px;
+    border-radius: 1000px;
     font-family: 'Source Sans Pro';
     font-size: 0.9em;
 }
 
-a:hover{
-
+.botao:hover{
 	background: #FFF;
     color: #013243;
     transition: .15s ease-in;
-
 }
-
-
-
-/*
-@import url('https://fonts.googleapis.com/css?family=Kalam');
-
-
-img:hover {
-    -webkit-transform: scaleX(-1.1);
-    transform: scaleX(-1.1);
-
-
-
-/
-
-}
-
-
-*/

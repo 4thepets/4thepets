@@ -82,12 +82,7 @@
                 throw new Exception(ExceptionTypeEnum::ERRO_SENHA_NULA_CADASTRO);
             
             if($senhaUsuario == $senhaConfirmacao){
-                $pattern = "/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*\/_-]).*$/"; 
-                if(preg_match($pattern, $senhaUsuario))
-                    return md5($senhaUsuario);
-                else
-                    throw new Exception(ExceptionTypeEnum::ERRO_SENHA_CADASTRO);
-                
+                return md5($senhaUsuario);
             }else{
                 throw new Exception(ExceptionTypeEnum::ERRO_VALIDACAO_SENHA_CADASTRO);
             }   

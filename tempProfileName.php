@@ -42,24 +42,30 @@
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
                 <div class="pageorg">
-                     <img class="img"   src="images/logo_4tp_white.png"/><br>
-                <?php
-                    if(isset($STATUS_MESSAGE))
-                        echo $STATUS_MESSAGE;
-                ?>
-               	<form method="post">
-               		<label for="tempName" class="title">Alterar Nome</label><br><br><br>
-               		<input type="text" name="tempName" required placeholder="Digite um novo nome"/><br><br>
-               		<input type="submit" name="tempChangeName" value="Alterar Nome" class="botao"/>
-               	</form>
-               </div>
+                     <img class="img" src="images/logo_4tp_white.png"/>
+                    <?php
+                        if(isset($STATUS_MESSAGE))
+                            echo $STATUS_MESSAGE;
+                    ?>
+               	    <form method="post">
+                        <label for="tempName" class="title">Alterar Nome</label>
+                        <?php
+                            if(isset($STATUS_MESSAGE))
+                                echo "<p>".$STATUS_MESSAGE."</p>";
+                            else
+                                echo "<p>Insira um nome válido.</p>";
+                        ?>
+               		    <input type="text" name="tempName" required placeholder="Digite um novo nome"/><br><br>
+               		    <input type="submit" name="tempChangeName" value="Alterar Nome" class="botao"/>
+               	    </form>
+                </div>
             </article>
         </section>
     </body>

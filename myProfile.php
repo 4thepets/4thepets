@@ -32,7 +32,7 @@
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
@@ -41,10 +41,13 @@
                 <div class="pageorg">
                     <img class="img"   src="images/logo_4tp_white.png" />
                     <h1 class="title">Minhas informações</h1>
-                    <p class="subtitle">Atualizar as informações é sempre bem vindo.</p><br/><br><br>
-                    <p class="subsubtitle"><b>Alias: </b> Marjorie  <br> <br>  <a href="tempProfileName.php" class="botao"> Alterar Nome</a></p> <br><br>
-                    <p class="subsubtitle"><b>Email: </b> teste   <br> <br>  <a href="tempProfileEmail.php" class="botao"> Alterar Email</a></p><br><br>
-                    <p class="subsubtitle"><b>Senha: </b>   <br><br><a href="tempProfilePassword.php" class="botao"> Alterar Senha</a><p><br>
+                    <p class="subtitle">Atualizar as informações é sempre bem vindo.</p><br/><br/>
+                    <p class="subsubtitle"><b>Meu alias: </b><?php echo $usuario->getNome(); ?></p><br/>
+                    <a href="tempProfileName.php" class="botao">Alterar Nome</a><br/><br/>
+                    <p class="subsubtitle"><b>Email: </b> teste </p><br/>
+                    <a href="tempProfileEmail.php" class="botao">Alterar Email</a><br/><br/>
+                    <p class="subsubtitle"><b>Senha: </b></p><br/>
+                    <a href="tempProfilePassword.php" class="botao">Alterar Senha</a><br/>
                 </div>
             </article>
         </section>

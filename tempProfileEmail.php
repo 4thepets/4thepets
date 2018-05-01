@@ -43,21 +43,24 @@
                     ?>                   
                     <li><a href='myProfile.php'>Meu Perfil</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myPets.php?interested=t">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets interessados</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
             <!-- Page Content -->
             <article class="pageContent">
                 <div class="pageorg">
-                    <img class="img"   src="images/logo_4tp_white.png"/><br>
-                <?php
-                    if(isset($STATUS_MESSAGE))
-                        echo $STATUS_MESSAGE;
-                ?>
+                    <img class="img" src="images/logo_4tp_white.png"/><br>
+                
                 
                	<form method="post">
-               		<label for="tempEmail" class="title">Alterar Email</label><br><br><br>
+                    <label for="tempEmail" class="title">Alterar Email</label>
+                    <?php
+                        if(isset($STATUS_MESSAGE))
+                            echo "<p>".$STATUS_MESSAGE."</p>";
+                        else
+                            echo "<p>Insira um email válido.</p>";
+                    ?>
                		<input type="email" name="tempEmail" required placeholder="Digite um novo email"/><br><br>
                		<input type="submit" name="tempChangeEmail" value="Alterar Email" class="botao"/> 
                	</form>                
