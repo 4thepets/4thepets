@@ -10,5 +10,8 @@
         const ERRO_SENHA_NULA_CADASTRO = "Por favor, preencha corretamente os campos de senha e confirmação.";
         const ERRO_VALIDACAO_SENHA_CADASTRO = "As senhas digitadas não coincidem.";
         const ERRO_INTERNO = "Erro interno. Por favor, contate a equipe de suporte.";
+        const ERRO_INTERNO_IMAGEM = "Erro ao salvar o arquivo.";
+        const ERRO_APENAS_IMAGENS = "Por favor, envie apenas imagens.";
+        const ERRO_ARQUIVO = "Por favor, envie um arquivo!";
     }
 ?>

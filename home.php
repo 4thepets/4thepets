@@ -25,6 +25,7 @@
     </head>
     
     <script src="https://npmcdn.com/minigrid@3.0.1/dist/minigrid.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/script.js"></script>
 
     <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
