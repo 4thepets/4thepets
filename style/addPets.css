@@ -27,6 +27,14 @@
     font-size: 1.3em;
 }
 
+.subsubtitle{
+  font-family: 'Source Sans Pro';
+  color: #FFF;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+
 .botao {
 	color: #013243;
     transition: .15s ease-in;
@@ -187,7 +195,34 @@ tentando melhorar o botao de "radio"*/
 }
 
 
+/*
+ajeitando a pagina de informação de pets com imagem"*/
 
+
+.divorg{
+  width: 60%;  
+  position: relative;
+  margin-top: 66px;
+  margin-left: 2%;
+  text-align: left; 
+  color: #FFF;
+  float: left;
+}
+
+.divorgimg{
+  width: 30%;  
+  position: relative;
+  margin-top: 66px;
+  margin-left: 5%;
+  float: left;
+
+}
+
+.divorgimg img{
+  width: 70%;
+  height: auto;
+  position: relative;
+}
 
 
 
