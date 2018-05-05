@@ -13,5 +13,7 @@
         const ERRO_INTERNO_IMAGEM = "Erro ao salvar o arquivo.";
         const ERRO_APENAS_IMAGENS = "Por favor, envie apenas imagens.";
         const ERRO_ARQUIVO = "Por favor, envie um arquivo!";
+        const ERRO_CATEGORIA = "Categoria inválida.";
+        const ERRO_GENERO = "Gênero inválido.";
     }
 ?>
