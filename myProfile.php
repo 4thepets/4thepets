@@ -44,7 +44,7 @@
                     <p class="subtitle">Atualizar as informações é sempre bem vindo.</p><br/><br/>
                     <p class="subsubtitle"><b>Meu alias: </b><?php echo $usuario->getNome(); ?></p><br/>
                     <a href="tempProfileName.php" class="botao">Alterar Nome</a><br/><br/>
-                    <p class="subsubtitle"><b>Email: </b> teste </p><br/>
+                    <p class="subsubtitle"><b>Email: </b><?php echo $usuario->getEmail(); ?></p><br/>
                     <a href="tempProfileEmail.php" class="botao">Alterar Email</a><br/><br/>
                     <p class="subsubtitle"><b>Senha: </b></p><br/>
                     <a href="tempProfilePassword.php" class="botao">Alterar Senha</a><br/>

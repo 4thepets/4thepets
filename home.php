@@ -56,7 +56,7 @@
                         <p class="indexApresentationSubtext">Muitos pets procuram um novo amigo. Um amigo que nem você.</p>
                     </figure>
                     <div class="readMore">
-                        <a href="#">Leia mais</a>
+                        <a href="#">Encontre um amigo</a>
                     </div>
                 </div>
                 <div class="pageContentPets">

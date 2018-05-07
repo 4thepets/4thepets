@@ -23,17 +23,20 @@
             $this->caminhoFoto = $caminhoFoto;
         }
 
-        public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $generoAnimal, $idadeAnimal, $isCastrado, $photoFile, $userId){
+        public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $generoAnimal, $idadeAnimal, $castrado, $caminhoFoto, $userId){
             if(!CategoriaEnum::isValidValue($categoriaAnimal))
                 throw new Exception(ExceptionTypeEnum::ERRO_CATEGORIA);
 
             if(!GeneroEnum::isValidValue($generoAnimal))
                 throw new Exception(ExceptionTypeEnum::ERRO_GENERO);
             
-            if(self::cadastrarImagem($file)){
+            $castrado = $castrado == "y" ? true : false;
+
+            if($caminhoFoto = self::atualizarImagem($caminhoFoto)){
+                $removido = false;
                 $conn = new DatabaseConnection();
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $SQL  = " INSERT INTO ".$conn.getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO (";
+                $SQL  = " INSERT INTO ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO (";
                 $SQL .= " `NAME_PET_ADICIONADO_ADOCAO_USUARIO`,";
                 $SQL .= " `NAME_CATEGORIA_PET_ADICIONADO_ADOCAO_USUARIO`,";
                 $SQL .= " `GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO`,";
@@ -47,7 +50,7 @@
                 $SQL .= " :categoriaAnimal,";
                 $SQL .= " :generoAnimal,";
                 $SQL .= " :idadeAnimal,";
-                $SQL .= " :isCadastrado,";
+                $SQL .= " :castrado,";
                 $SQL .= " :caminhoFoto,";
                 $SQL .= " :isRemoved,";
                 $SQL .= " :userId);";
@@ -56,9 +59,9 @@
                 $stmt->bindParam(":categoriaAnimal", $categoriaAnimal);
                 $stmt->bindParam(":generoAnimal", $generoAnimal);
                 $stmt->bindParam(":idadeAnimal", $idadeAnimal);
-                $stmt->bindParam(":isCastrado", $isCastrado);
+                $stmt->bindParam(":castrado", $castrado);
                 $stmt->bindParam(":caminhoFoto",$caminhoFoto);
-                $stmt->bindParam(":isRemoved", false);
+                $stmt->bindParam(":isRemoved", $removido);
                 $stmt->bindParam(":userId", $userId);
                 if($stmt->execute())
                     return true;
@@ -67,6 +70,7 @@
 
         public static function retornarPets($userId){
             $petsArray = array();
+            $isRemoved = false;
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL  = " SELECT * FROM ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
@@ -75,7 +79,7 @@
             $SQL .= " ORDER BY SYS_DATE_PET_ADICIONADO_ADOCAO_USUARIO DESC";
             $stmt = $conn->prepare($SQL);
             $stmt->bindParam(":userId", $userId);
-            $stmt->bindParam(":isRemoved", false);
+            $stmt->bindParam(":isRemoved", $isRemoved);
             if($stmt->execute()){
                 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($data as $row) {
@@ -103,7 +107,7 @@
     
         public function setNome($petId, $nome){
             $conn = new DatabaseConnection();
-            $SQL  = " UPDATE "$conn->getDbName()".TB_PET_ADICIONADO_ADOCAO_USUARIO";
+            $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET NAME_PET_ADICIONADO_ADOCAO_USUARIO = :nome";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);
@@ -124,7 +128,7 @@
                 throw new Exception(ExceptionTypeEnum::ERRO_CATEGORIA);
             
             $conn = new DatabaseConnection();
-            $SQL  = " UPDATE "$conn->getDbName()".TB_PET_ADICIONADO_ADOCAO_USUARIO";
+            $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET NAME_CATEGORIA_PET_ADICIONADO_ADOCAO_USUARIO = :categoria";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);
@@ -145,7 +149,7 @@
                 throw new Exception(ExceptionTypeEnum::ERRO_GENERO);
             
             $conn = new DatabaseConnection();
-            $SQL  = " UPDATE "$conn->getDbName()".TB_PET_ADICIONADO_ADOCAO_USUARIO";
+            $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO = :genero";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);
@@ -163,7 +167,7 @@
     
         public function setIdade($petId, $idade){
             $conn = new DatabaseConnection();
-            $SQL  = " UPDATE "$conn->getDbName()".TB_PET_ADICIONADO_ADOCAO_USUARIO";
+            $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO = :idade";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);
@@ -181,7 +185,7 @@
     
         public function setCastracao($petId, $castracao){
             $conn = new DatabaseConnection();
-            $SQL  = " UPDATE "$conn->getDbName()".TB_PET_ADICIONADO_ADOCAO_USUARIO";
+            $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO = :castracao";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);
@@ -199,12 +203,12 @@
     
         public function setCaminhoFoto($caminhoFoto){
             //alterar imagem
-            if(self::alterarImagem($file))
+            //if(self::alterarImagem($file))
         }
 
         public function removeCadastro($petId){
             $conn = new DatabaseConnection();
-            $SQL  = " UPDATE "$conn->getDbName()".TB_PET_ADICIONADO_ADOCAO_USUARIO";
+            $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :true";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);

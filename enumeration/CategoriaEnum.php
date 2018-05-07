@@ -2,11 +2,11 @@
     include_once "Enumeration.php";
 
     Class CategoriaEnum extends Enumeration{
-        const CACHORRO = "Cão";
-        const GATO = "Gato";
-        const PEIXE = "Peixe";
+        const CACHORRO = "Cães";
+        const GATO = "Gatos";
+        const PEIXE = "Peixes";
         const PEQUENOS = "Pequeninos";
-        const GRANDES = "Grande Porte";
+        const GRANDES = "Aves";
         const OUTROS = "Outros";
     }
 ?>

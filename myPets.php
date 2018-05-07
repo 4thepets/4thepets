@@ -1,5 +1,6 @@
 <?php
     include_once "model/Usuario.php";
+    include_once "model/AnimalEstimacao.php";
     session_start();
     if($_SESSION['USUARIO'])
         $usuario = unserialize($_SESSION['USUARIO']);
@@ -59,43 +60,15 @@
                     </div>
                 </div>
                 <div class="pageContentPets">
-                    <h1>Conheça alguns amigos!</h1>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/02.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/03.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
+                    <h1>Minha lista de pets!</h1>
+                    <?php
+                        $myPets = AnimalEstimacao::retornarPets($usuario->getCode());
+                        foreach ($myPets as $myPet) { ?>
+                            <div class="card">
+                                <img src="<?php echo $myPet->getCaminhoFoto(); ?>"/>
+                                <p><?php echo $myPet->getNome().", ".$myPet->getIdade(); ?></p>
+                            </div>
+                    <?php } ?>
                     <div class="clear"></div>
                 </div>
             </article>

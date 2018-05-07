@@ -6,6 +6,10 @@
             $this->code = $code;
         }
 
+        public function getCode(){
+            return $this->code;
+        }
+
         //Transforma booleano em 0 ou 1 (MySQL)
         public static function toTinyInt($bool){
             if($bool) 
@@ -14,7 +18,7 @@
                 return 0;
         }
 
-        public function cadastrarImagem($postFile){
+        public function atualizarImagem($postFile, $update = false){
             switch(static::class){
                 case 'Usuario':
                     $dir = "user";
@@ -31,14 +35,18 @@
                 default:
                     throw new Exception(ExceptionTypeEnum::ERRO_INTERNO);
             }
-            $caminhoFoto = validarImagem($postFile, $dir);
-            $conn = new DatabaseConnection();
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $conn->prepare("UPDATE ".$conn->getDbName().".".$table." SET ".$imageColumn." = :caminhoFoto WHERE ".$codeColumn." = :pkId");
-            $stmt->bindParam("caminhoFoto", $caminhoFoto);
-            $stmt->bindParam("pkId", $this->code);
-            if($stmt->execute())
-                return true;
+            $caminhoFoto = self::validarImagem($postFile, $dir);
+            if($update){
+                $conn = new DatabaseConnection();
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $conn->prepare("UPDATE ".$conn->getDbName().".".$table." SET ".$imageColumn." = :caminhoFoto WHERE ".$codeColumn." = :pkId");
+                $stmt->bindParam("caminhoFoto", $caminhoFoto);
+                $stmt->bindParam("pkId", $this->code);
+                if($stmt->execute())
+                    return true;    
+            }else{
+                return $caminhoFoto;
+            }
         }
 
         public function validarImagem($file, $dir){
@@ -54,8 +62,10 @@
                         throw new Exception(ExceptionTypeEnum::ERRO_INTERNO_IMAGEM);
                 }else
                     throw new Exception(ExceptionTypeEnum::ERRO_APENAS_IMAGENS);
-            }else
-                throw new Exception(ExceptionTypeEnum::ERRO_ARQUIVO);
+            }else{
+                $localFile = "images/sample/default.png";
+                return $localFile;
+            }
         }
     }
 ?>
