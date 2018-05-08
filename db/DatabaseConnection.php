@@ -10,7 +10,9 @@
 			}else{
 				$db = 'DEV';
 			}
-			//$db = 'LOCAL';
+			//configuração para apontar para o BD local
+			$db = 'LOCAL';
+			
 			if(!$settings = parse_ini_file($file, TRUE))
 				throw new Exception('Não foi possível abrir o arquivo '.$file.'.');
 			$this->dbName = $settings[$db]['schema'];	
