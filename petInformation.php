@@ -1,11 +1,17 @@
 <?php
     include_once "model/Usuario.php";
+    include_once "model/AnimalEstimacao.php";
     include_once "enumeration/CategoriaEnum.php";
     session_start();
     if($_SESSION['USUARIO'])
         $usuario = unserialize($_SESSION['USUARIO']);
     else
         header("location: index.php");
+
+    if(isset($_GET['petValue'])){
+        $animalEstimacao = AnimalEstimacao::retornaPetAdotadoInfo($_GET['petValue'], $usuario->getCode());
+    }else
+        header('location: home.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,24 +51,18 @@
             <article class="pageContent">
                 <div class="pageorg">
                     <img  src="images/logo_4tp_white.png" class="img"/><br>
-                <h1 class="title">Informações do pet</h1>
-                <p class="subtitle">Tudo o que você precisa saber sobre o pet.</p><br/><br/>
-
-            <div class="divorgimg">
-                <img src="images/bkg/01.jpg"/>                        
-            </div>
-             <div class="divorg">
-                <p class="subsubtitle"><b>Nome:  </b>Mimosa</p><br/>
-                <p class="subsubtitle"><b>Dono:  </b>Murilo Xavier</p><br/>
-                <p class="subsubtitle"><b>Endereço: </b>Rua das Acácias, nº4. Ocian. Praia Grande. SP. Brasil</p><br/>
-                <p class="subsubtitle"><b>Tefefone: </b>13 3456-3983</p><br/>
-                <p class="subsubtitle"><b>Email: </b>usario22@gmail.com</p><br/>
-            </div>
-
-
-
-
-
+                    <h1 class="title">Informações do pet</h1>
+                    <p class="subtitle">Tudo o que você precisa saber sobre o pet.</p><br/><br/>
+                    <div class="divorgimg">
+                        <img src="<?php echo $animalEstimacao->getCaminhoFoto(); ?>"/>                        
+                    </div>
+                    <div class="divorg">
+                        <p class="subsubtitle"><b>Nome:  </b><?php echo $animalEstimacao->getNome(); ?></p><br/>
+                        <p class="subsubtitle"><b>Dono:  </b><?php echo $animalEstimacao->getOwner(); ?></p><br/>
+                        <p class="subsubtitle"><b>Endereço: </b>IN BUILDING Rua das Acácias, nº4. Ocian. Praia Grande. SP. Brasil</p><br/>
+                        <p class="subsubtitle"><b>Tefefone: </b> IN BUILDING 13 3456-3983</p><br/>
+                        <p class="subsubtitle"><b>Email do Dono: </b>usario22@gmail.com</p><br/>
+                    </div>
                 </div>
             </article>
         </section>

@@ -34,7 +34,6 @@
     font-weight: normal;
 }
 
-
 .botao {
 	color: #013243;
     transition: .15s ease-in;
@@ -53,16 +52,17 @@ input[type=submit]:hover {
     background: #FFF;
     color: #013243;
     transition: .15s ease-in;
+    cursor: pointer;
 }
 
 input[type=password] {
-    width: 50%;
+    width: 40%;
     margin: 1%;
-    padding: 12px 20px;
+    padding: 8px 14px;
     box-sizing: border-box;
     border: 2px solid white;
     font-family: 'Source Sans Pro';
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
     color: #FFF;
     border-radius: 4px;
@@ -70,42 +70,44 @@ input[type=password] {
 }
 
 input[type=text] {
-    width: 50%;
+    width: 40%;
     margin: 1%;
-    padding: 12px 20px;
+    padding: 8px 14px;
     box-sizing: border-box;
     border: 2px solid white;
     font-family: 'Source Sans Pro';
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
     color: #FFF;
     border-radius: 4px;
     background: transparent;
 }
 select {
-    width: 50%;
+    width: 40%;
     margin: 1%;
-    padding: 12px 20px;
+    padding: 8px 14px;
     box-sizing: border-box;
     border: 2px solid white;
     font-family: 'Source Sans Pro';
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
-    color: black;
+    color: white;
     border-radius: 4px;
-    background-color: transparent;
+    background: transparent;
 }
 
-
+select option {
+  color: black;
+}
 
 input[type=number] {
-    width: 50%;
+    width: 40%;
     margin: 1%;
-    padding: 12px 20px;
+    padding: 8px 14px;
     box-sizing: border-box;
     border: 2px solid white;
     font-family: 'Source Sans Pro';
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
     color: #FFF;
     border-radius: 4px;
@@ -141,12 +143,12 @@ tentando melhorar o botao de "radio"*/
   -ms-appearance: none;
   -o-appearance: none;
   position: relative;
-  top: 13.33333px;
+  top: 5px;
   right: 0;
   bottom: 0;
   left: 0;
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   transition: all 0.15s ease-out 0s;
    
   cursor: pointer;
@@ -168,14 +170,13 @@ tentando melhorar o botao de "radio"*/
   background: #FFF;
 }
 .option-input:checked::before {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
   position: absolute;
   content: '✔';
   display: inline-block;
-  font-size: 30px;
   text-align: center;
-  line-height: 30px;
+  line-height: 20px;
 }
 .option-input:checked::after {
   -webkit-animation: click-wave 0.65s;
@@ -188,12 +189,38 @@ tentando melhorar o botao de "radio"*/
   z-index: 100;
 }
 .option-input.radio {
-  border-radius: 80%;
+  border-radius: 10000px;
 }
 .option-input.radio::after {
-  border-radius: 80%;
+  border-radius: 10000px;
 }
 
+.file-input{
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.file-input + label {
+  font-size: 1em;
+  padding: 0.6% 1%;
+  font-family: 'Source Sans Pro';
+  color: #013243;
+  background-color: #FFF;
+  border: 1px solid #FFF;
+}
+
+.file-input:focus + label,
+.file-input + label:hover {
+  padding: 0.8% 1.3%;
+  cursor: pointer;
+  transition: .15s ease-in-out;
+  outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
 
 /*
 ajeitando a pagina de informação de pets com imagem"*/
@@ -223,13 +250,3 @@ ajeitando a pagina de informação de pets com imagem"*/
   height: auto;
   position: relative;
 }
-
-
-
-
-
-/*
-color: #FFF;
-background: transparent;
-
-*/
