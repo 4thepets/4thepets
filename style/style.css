@@ -107,6 +107,11 @@ body{
     margin-left: -5%;
 }
 
+.homeContent .pageContentApresentation figure img:hover{
+    transform: scale(1.3);
+    transition: .30s ease;
+}
+
 .homeContent .pageContentApresentation figure figcaption{
     text-align: center;
     font-family: 'Source Sans Pro';

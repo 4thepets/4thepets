@@ -65,8 +65,10 @@
                         $myPets = AnimalEstimacao::retornarPets($usuario->getCode());
                         foreach ($myPets as $myPet) { ?>
                             <div class="card">
+                                <a href="petInformation.php?petValue=<?php echo $myPet->getCode(); ?>">
                                 <img src="<?php echo $myPet->getCaminhoFoto(); ?>"/>
                                 <p><?php echo $myPet->getNome().", ".$myPet->getIdade(); ?></p>
+                                </a>
                             </div>
                     <?php } ?>
                     <div class="clear"></div>

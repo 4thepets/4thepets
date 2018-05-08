@@ -12,8 +12,9 @@
         private $idade;
         private $castracao;
         private $caminhoFoto;
+        private $owner;
 
-        public function __construct($code, $nome, $categoria, $genero, $idade, $castracao, $caminhoFoto){
+        public function __construct($code, $nome, $categoria, $genero, $idade, $castracao, $caminhoFoto, $owner = null){
             parent::__construct($code);
             $this->nome = $nome;
             $this->categoria = $categoria;
@@ -21,6 +22,7 @@
             $this->idade = $idade;
             $this->castracao = $castracao;
             $this->caminhoFoto = $caminhoFoto;
+            $this->owner = $owner;
         }
 
         public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $generoAnimal, $idadeAnimal, $castrado, $caminhoFoto, $userId){
@@ -98,6 +100,46 @@
 
         public static function retornaPetsInteressados(){
 
+        }
+
+        public function retornaPetAdotadoInfo($petId, $userId){
+            $isRemoved = false;
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL  = " SELECT";
+            $SQL .= " p.CODE_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.NAME_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.NAME_CATEGORIA_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO, ";
+            $SQL .= " p.IMAG_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " u.NAME_USUARIO";
+            $SQL .= " FROM ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO p";
+            $SQL .= " JOIN ".$conn->getDbName().".TB_USUARIO u ON p.CDFK_USUARIO = u.CODE_USUARIO";
+            $SQL .= " WHERE CDFK_USUARIO = :userId";
+            $SQL .= " AND CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
+            $SQL .= " AND SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :isRemoved";
+            $SQL .= " ORDER BY SYS_DATE_PET_ADICIONADO_ADOCAO_USUARIO DESC";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam(":userId", $userId);
+            $stmt->bindParam(":petId", $petId);
+            $stmt->bindParam(":isRemoved", $isRemoved);
+            if($stmt->execute()){
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $animalEstimacao = new AnimalEstimacao(
+                        $row['CODE_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['NAME_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['NAME_CATEGORIA_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['IMAG_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['NAME_USUARIO']);
+                }
+            }
+            return $animalEstimacao;
         }
 
         // GETS & SETS
@@ -204,6 +246,10 @@
         public function setCaminhoFoto($caminhoFoto){
             //alterar imagem
             //if(self::alterarImagem($file))
+        }
+
+        public function getOwner(){
+            return $this->owner;
         }
 
         public function removeCadastro($petId){
