@@ -115,8 +115,48 @@
             return $petsArray;
         }
 
-        public static function retornaPetsInteressados(){
-
+        public static function retornarPetsInteressados($userId){
+            $petsInteresse = array();
+            $isRemoved = false;
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL  = " SELECT";
+            $SQL .= " p.CODE_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.NAME_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.NAME_CATEGORIA_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO, ";
+            $SQL .= " p.IMAG_PET_ADICIONADO_ADOCAO_USUARIO,";
+            $SQL .= " p.CDFK_USUARIO";
+            $SQL .= " FROM ".$conn->getDbName().".TB_PET_INTERESSE_ADOCAO_USUARIO i";
+            $SQL .= " JOIN ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO p ON i.CDFK_PET_ADICIONADO_ADOCAO_USUARIO = p.CODE_PET_ADICIONADO_ADOCAO_USUARIO";
+            $SQL .= " JOIN ".$conn->getDbName().".TB_USUARIO u ON i.CDFK_USUARIO = u.CODE_USUARIO";
+            $SQL .= " WHERE SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :isRemoved";
+            $SQL .= " AND i.CDFK_USUARIO = :userId";
+            $SQL .= " ORDER BY SYS_DATE_PET_ADICIONADO_ADOCAO_USUARIO DESC";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam(":isRemoved", $isRemoved);
+            $stmt->bindParam(":userId", $userId);
+            if($stmt->execute()){
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($data as $row) {
+                    $petsInteresse[] = new AnimalEstimacao(
+                        $row['CODE_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['NAME_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['NAME_CATEGORIA_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        $row['IMAG_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        null,
+                        null,
+                        null,
+                        null,
+                        $row['CDFK_USUARIO']);
+                }
+            }
+            return $petsInteresse;
         }
 
         public function retornaPetAdotadoInfo($petId){

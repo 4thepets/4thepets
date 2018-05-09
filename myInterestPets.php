@@ -1,5 +1,6 @@
 <?php
     include_once "model/Usuario.php";
+    include_once "model/AnimalEstimacao.php";
     include_once "enumeration/CategoriaEnum.php";
     session_start();
     if($_SESSION['USUARIO'])
@@ -51,46 +52,20 @@
                 </div>
                 <div class="pageContentPets">
                     <h1>Adote um amigo!</h1>
-                    <div class="card">
-                        <a href="petInformation.php">
-                            <img src="images/bkg/01.jpg"/>
-                            <p>Leko, 15</p>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <a href="petInformation.php">
-                        <img src="images/bkg/02.jpg"/>
-                        <p>Leko, 15</p>
-                        </a>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/03.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
+                    <?php
+                        $myPets = AnimalEstimacao::retornarPetsInteressados($usuario->getCode());
+                        if(!empty($myPets)){
+                            foreach ($myPets as $myPet) { ?>
+                                <div class="card">
+                                    <a href="petInformation.php?petValue=<?php echo $myPet->getCode(); ?>">
+                                    <img src="<?php echo $myPet->getCaminhoFoto(); ?>"/>
+                                    <p><?php echo $myPet->getNome().", ".$myPet->getIdade(); ?></p>
+                                    </a>
+                                </div>
+                        <?php }
+                            }
+                            else echo "<p style='color: #fff; font-family: Source Sans Pro;'>Nenhum animal encontrado. Porque não registra um?</p>";
+                        ?>
                     <div class="clear"></div>
                 </div>
             </article>           
