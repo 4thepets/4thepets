@@ -64,7 +64,7 @@
                         <p class="subsubtitle"><b>Email do Dono: </b><?php echo $animalEstimacao->getEmailDono(); ?></p><br/>
                         <form method="post">
                             <input type="submit" name="petRemove" value="Remover Pet" class="removePet"/>
-                            <a href="#" class="editPet">Alterar dados</a>
+                            <a href="updatePet.php" class="editPet">Alterar dados</a>
                         </form>
                     </div>
                 </div>
