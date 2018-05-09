@@ -5,17 +5,17 @@
         $usuario = unserialize($_SESSION['USUARIO']);
     else
         header("location: index.php");
-
-    if(isset($_POST['tempChangeName'])){
-        try{
-            if($usuario->alterarNome($_POST['tempName'])){
-                $SUCESS_MESSAGE = "Sucesso";
-                $_SESSION['USUARIO'] = serialize($usuario);
-            }
-        }catch(Exception $e){
-            $STATUS_MESSAGE = $e->getMessage();
-        }
+        if(isset($_POST['tempChangeTelephone'])){
+            try{
+                if($usuario->alterarTelefone($_POST['tempTelephone'])){
+                    $STATUS_MESSAGE = "Sucesso";
+                    $_SESSION['USUARIO'] = serialize($usuario);
+                }
+            }catch(Exception $e){
+                $STATUS_MESSAGE = $e->getMessage();
+            }    
     }
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,8 +24,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
-        <link rel="stylesheet" type="text/css" href="style/tempProfileName.css"/>
-        <title>Alterar Nome</title>
+         <link rel="stylesheet" type="text/css" href="style/tempProfileName.css"/>
+
+        <title>Alterar Email</title>
     </head>
     <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
         <div class="filterOpacity"></div>
@@ -33,7 +34,7 @@
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p><?php if(isset($SUCESS_MESSAGE)) echo "Alterado para: ".$usuario->getNome(); else echo "Bem vindo ".$usuario->getNome();?>!</p>
+                   <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
@@ -49,20 +50,20 @@
             <!-- Page Content -->
             <article class="pageContent">
                 <div class="pageorg">
-                     <img class="img" src="images/logo_4tp_white.png"/>
-               	    <form method="post">
-                        <label for="tempName" class="title">Alterar Nome</label>
-                        <?php
-                            if(isset($STATUS_MESSAGE))
-                                echo "<p>".$STATUS_MESSAGE."</p>";
-                            else
-                                echo "<p>Insira um nome válido.</p>";
-                        ?>
-               		    <input type="text" name="tempName" required placeholder="Digite um novo nome"/><br><br>
-               		    <input type="submit" name="tempChangeName" value="Alterar Nome" class="botao"/>
-               	    </form>
-                </div>
+                    <img class="img" src="images/logo_4tp_white.png"/><br>
+               	<form method="post">
+                    <label for="tempEmail" class="title">Alterar Telefone</label>
+                    <?php
+                        if(isset($STATUS_MESSAGE))
+                            echo "<p>".$STATUS_MESSAGE."</p>";
+                        else
+                            echo "<p>Insira um telefone válido.</p>";
+                    ?>
+               		<input type="text" name="tempTelephone" required placeholder="Digite um novo telefone"/><br><br>
+               		<input type="submit" name="tempChangeTelephone" value="Alterar Telefone" class="botao"/> 
+               	</form>                
             </article>
+            </div>
         </section>
     </body>
 </html>

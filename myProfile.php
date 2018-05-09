@@ -39,7 +39,7 @@
             <!-- Page Content -->
             <article class="pageContent">
                 <div class="pageorg">
-                    <img class="img"   src="images/logo_4tp_white.png" />
+                    <img class="img" src="images/logo_4tp_white.png" />
                     <h1 class="title">Minhas informações</h1>
                     <p class="subtitle">Atualizar as informações é sempre bem vindo.</p><br/><br/>
                     <p class="subsubtitle"><b>Meu alias: </b><?php echo $usuario->getNome(); ?></p><br/>
@@ -47,7 +47,11 @@
                     <p class="subsubtitle"><b>Email: </b><?php echo $usuario->getEmail(); ?></p><br/>
                     <a href="tempProfileEmail.php" class="botao">Alterar Email</a><br/><br/>
                     <p class="subsubtitle"><b>Senha: </b></p><br/>
-                    <a href="tempProfilePassword.php" class="botao">Alterar Senha</a><br/>
+                    <a href="tempProfilePassword.php" class="botao">Alterar Senha</a><br/><br/>
+                    <p class="subsubtitle"><b>Endereço: </b><?php if($usuario->getEndereco() == null) echo "Não definido."; else echo $usuario->getEndereco(); ?></p><br/>
+                    <a href="tempProfileAddress.php" class="botao">Alterar Endereço</a><br/><br/>
+                    <p class="subsubtitle"><b>Telefone: </b><?php if($usuario->getTelefone() == null) echo "Não definido."; else echo $usuario->getTelefone(); ?></p><br/>
+                    <a href="tempProfileTelephone.php" class="botao">Alterar Telefone</a><br/><br/>
                 </div>
             </article>
         </section>

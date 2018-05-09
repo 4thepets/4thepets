@@ -15,5 +15,7 @@
         const ERRO_ARQUIVO = "Por favor, envie um arquivo!";
         const ERRO_CATEGORIA = "Categoria inválida.";
         const ERRO_GENERO = "Gênero inválido.";
+        const ERRO_ENDERECO_INVALIDO = "Endereço inválido.";
+        const ERRO_TELEFONE_INVALIDO = "Telefone inválido.";
     }
 ?>

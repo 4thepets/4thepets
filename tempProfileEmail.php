@@ -51,8 +51,6 @@
             <article class="pageContent">
                 <div class="pageorg">
                     <img class="img" src="images/logo_4tp_white.png"/><br>
-                
-                
                	<form method="post">
                     <label for="tempEmail" class="title">Alterar Email</label>
                     <?php

@@ -58,10 +58,14 @@
                     </div>
                     <div class="divorg">
                         <p class="subsubtitle"><b>Nome:  </b><?php echo $animalEstimacao->getNome(); ?></p><br/>
-                        <p class="subsubtitle"><b>Dono:  </b><?php echo $animalEstimacao->getOwner(); ?></p><br/>
-                        <p class="subsubtitle"><b>Endereço: </b>IN BUILDING Rua das Acácias, nº4. Ocian. Praia Grande. SP. Brasil</p><br/>
-                        <p class="subsubtitle"><b>Tefefone: </b> IN BUILDING 13 3456-3983</p><br/>
-                        <p class="subsubtitle"><b>Email do Dono: </b>usario22@gmail.com</p><br/>
+                        <p class="subsubtitle"><b>Dono:  </b><?php echo $animalEstimacao->getNomeDono(); ?></p><br/>
+                        <p class="subsubtitle"><b>Endereço: </b><?php if($animalEstimacao->getEndDono() == null) echo "Não definido pelo usuário."; else echo $animalEstimacao->getEndDono(); ?></p><br/>
+                        <p class="subsubtitle"><b>Tefefone: </b><?php if($animalEstimacao->getTelDono() == null) echo "Não definido pelo usuário."; else echo $animalEstimacao->getTelDono(); ?></p><br/>
+                        <p class="subsubtitle"><b>Email do Dono: </b><?php echo $animalEstimacao->getEmailDono(); ?></p><br/>
+                        <form method="post">
+                            <input type="submit" name="petRemove" value="Remover Pet" class="removePet"/>
+                            <a href="#" class="editPet">Alterar dados</a>
+                        </form>
                     </div>
                 </div>
             </article>

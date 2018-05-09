@@ -48,7 +48,7 @@
     font-size: 0.9em;
 }
 
-input[type=submit]:hover {
+.botao:hover {
     background: #FFF;
     color: #013243;
     transition: .15s ease-in;
@@ -229,8 +229,8 @@ ajeitando a pagina de informação de pets com imagem"*/
 .divorg{
   width: 60%;  
   position: relative;
-  margin-top: 66px;
   margin-left: 2%;
+  margin-bottom: 5%;
   text-align: left; 
   color: #FFF;
   float: left;
@@ -239,7 +239,6 @@ ajeitando a pagina de informação de pets com imagem"*/
 .divorgimg{
   width: 30%;  
   position: relative;
-  margin-top: 66px;
   margin-left: 5%;
   float: left;
 
@@ -249,4 +248,31 @@ ajeitando a pagina de informação de pets com imagem"*/
   width: 70%;
   height: auto;
   position: relative;
+}
+
+/* Botão removerPet */
+.removePet, .editPet{
+  position: relative;
+  text-decoration: none;
+  padding: 1% 2%;
+  border: 1px solid #FFF;
+  color: #FFF;
+  background: transparent;
+  border-radius: 100px;
+  font-family: 'Source Sans Pro';
+  font-size: 0.9em;
+}
+
+.removePet:hover{
+  background: #d32f2f;
+  color: #FFF;
+  transition: .15s ease-in;
+  cursor: pointer;
+}
+
+.editPet:hover{
+  color: #013243;
+  background: #FFF;
+  transition: .15s ease-in;
+  cursor: pointer;
 }

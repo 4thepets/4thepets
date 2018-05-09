@@ -12,9 +12,12 @@
         private $idade;
         private $castracao;
         private $caminhoFoto;
-        private $owner;
+        private $nomeDono;
+        private $emailDono;
+        private $endDono;
+        private $telDono;
 
-        public function __construct($code, $nome, $categoria, $genero, $idade, $castracao, $caminhoFoto, $owner = null){
+        public function __construct($code, $nome, $categoria, $genero, $idade, $castracao, $caminhoFoto, $nomeDono = null, $emailDono = null, $endDono = null, $telDono = null){
             parent::__construct($code);
             $this->nome = $nome;
             $this->categoria = $categoria;
@@ -22,7 +25,10 @@
             $this->idade = $idade;
             $this->castracao = $castracao;
             $this->caminhoFoto = $caminhoFoto;
-            $this->owner = $owner;
+            $this->nomeDono = $nomeDono;
+            $this->emailDono = $emailDono;
+            $this->endDono = $endDono;
+            $this->telDono = $telDono;
         }
 
         public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $generoAnimal, $idadeAnimal, $castrado, $caminhoFoto, $userId){
@@ -114,7 +120,10 @@
             $SQL .= " p.NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO,";
             $SQL .= " p.BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO, ";
             $SQL .= " p.IMAG_PET_ADICIONADO_ADOCAO_USUARIO,";
-            $SQL .= " u.NAME_USUARIO";
+            $SQL .= " u.NAME_USUARIO,";
+            $SQL .= " u.NAME_EMAIL_USUARIO,";
+            $SQL .= " u.NAME_ENDERECO_USUARIO,";
+            $SQL .= " u.NBR_TELEFONE_USUARIO";
             $SQL .= " FROM ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO p";
             $SQL .= " JOIN ".$conn->getDbName().".TB_USUARIO u ON p.CDFK_USUARIO = u.CODE_USUARIO";
             $SQL .= " WHERE CDFK_USUARIO = :userId";
@@ -136,7 +145,10 @@
                         $row['NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO'],
                         $row['BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO'],
                         $row['IMAG_PET_ADICIONADO_ADOCAO_USUARIO'],
-                        $row['NAME_USUARIO']);
+                        $row['NAME_USUARIO'],
+                        $row['NAME_EMAIL_USUARIO'],
+                        $row['NAME_ENDERECO_USUARIO'],
+                        $row['NBR_TELEFONE_USUARIO']);
                 }
             }
             return $animalEstimacao;
@@ -248,8 +260,20 @@
             //if(self::alterarImagem($file))
         }
 
-        public function getOwner(){
-            return $this->owner;
+        public function getNomeDono(){
+            return $this->nomeDono;
+        }
+
+        public function getEmailDono(){
+            return $this->emailDono;
+        }
+
+        public function getEndDono(){
+            return $this->endDono;
+        }
+
+        public function getTelDono(){
+            return $this->telDono;
         }
 
         public function removeCadastro($petId){

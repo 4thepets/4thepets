@@ -6,10 +6,10 @@
     else
         header("location: index.php");
 
-    if(isset($_POST['tempChangeName'])){
+    if(isset($_POST['tempChangeAddress'])){
         try{
-            if($usuario->alterarNome($_POST['tempName'])){
-                $SUCESS_MESSAGE = "Sucesso";
+            if($usuario->alterarEndereco($_POST['tempAddress'])){
+                $STATUS_MESSAGE = "Sucesso";
                 $_SESSION['USUARIO'] = serialize($usuario);
             }
         }catch(Exception $e){
@@ -33,7 +33,7 @@
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p><?php if(isset($SUCESS_MESSAGE)) echo "Alterado para: ".$usuario->getNome(); else echo "Bem vindo ".$usuario->getNome();?>!</p>
+                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
@@ -51,15 +51,15 @@
                 <div class="pageorg">
                      <img class="img" src="images/logo_4tp_white.png"/>
                	    <form method="post">
-                        <label for="tempName" class="title">Alterar Nome</label>
+                        <label for="tempName" class="title">Alterar Endereço</label>
                         <?php
                             if(isset($STATUS_MESSAGE))
                                 echo "<p>".$STATUS_MESSAGE."</p>";
                             else
-                                echo "<p>Insira um nome válido.</p>";
+                                echo "<p>Insira um endereço.</p>";
                         ?>
-               		    <input type="text" name="tempName" required placeholder="Digite um novo nome"/><br><br>
-               		    <input type="submit" name="tempChangeName" value="Alterar Nome" class="botao"/>
+               		    <input type="text" name="tempAddress" required placeholder="Digite um novo endereço."/><br><br>
+               		    <input type="submit" name="tempChangeAddress" value="Alterar Endereco" class="botao"/>
                	    </form>
                 </div>
             </article>

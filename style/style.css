@@ -192,6 +192,10 @@ body{
     background: #013243;
 }
 
+.homeContent .pageContentPets .card a{
+    text-decoration: none;
+}
+
 .clear{
     clear: both;
 }

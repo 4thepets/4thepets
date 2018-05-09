@@ -7,12 +7,16 @@
         private $nome;
         private $caminhoFoto;
         private $email;
+        private $endereco;
+        private $telefone;
     
-        public function __construct($code, $nome, $email, $caminhoFoto){
+        public function __construct($code, $nome, $email, $endereco, $telefone, $caminhoFoto){
             parent::__construct($code);
             $this->nome = $nome;
             $this->email = $email;
             $this->caminhoFoto = $caminhoFoto;
+            $this->endereco = $endereco;
+            $this->telefone = $telefone;
         }
         
         public static function efetuarCadastro($nomeUsuario, $emailUsuario, $senhaUsuario, $senhaConfirmacao){
@@ -53,7 +57,13 @@
             $stmt->execute();
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if($result)
-                return new Usuario($result['CODE_USUARIO'], $result['NAME_USUARIO'], $result['NAME_EMAIL_USUARIO'], $result['IMAG_USUARIO']);
+                return new Usuario(
+                    $result['CODE_USUARIO'], 
+                    $result['NAME_USUARIO'], 
+                    $result['NAME_EMAIL_USUARIO'], 
+                    $result['NAME_ENDERECO_USUARIO'], 
+                    $result['NBR_TELEFONE_USUARIO'], 
+                    $result['IMAG_USUARIO']);
             else
                 throw new Exception(ExceptionTypeEnum::ERRO_DADOS_INCORRETOS_LOGIN);
         }
@@ -128,6 +138,34 @@
             }   
         }
 
+        public function alterarEndereco($endereco){
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NAME_ENDERECO_USUARIO = :endereco WHERE CODE_USUARIO = :userId";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam("endereco", $endereco);
+            $stmt->bindParam("userId", $this->code);
+            if($stmt->execute()){
+                $this->endereco = $endereco;
+                return true;
+            }else
+                throw new Exception(ExceptionTypeEnum::ERRO_ENDERECO_INVALIDO);
+        }
+
+        public function alterarTelefone($telefone){
+            $conn = new DatabaseConnection();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NBR_TELEFONE_USUARIO = :telefone WHERE CODE_USUARIO = :userId";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam("telefone", $telefone);
+            $stmt->bindParam("userId", $this->code);
+            if($stmt->execute()){
+                $this->telefone = $telefone;
+                return true;
+            }else
+                throw new Exception(ExceptionTypeEnum::ERRO_TELEFONE_INVALIDO);
+        }
+
         public function getNome(){
             return $this->nome;
         }
@@ -138,6 +176,14 @@
 
         public function getEmail(){
             return $this->email;
+        }
+        
+        public function getEndereco(){
+            return $this->endereco;
+        }
+
+        public function getTelefone(){
+            return $this->telefone;
         }
     }
 ?>
