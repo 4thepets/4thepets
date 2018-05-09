@@ -87,7 +87,7 @@
             $SQL .= " WHERE SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :isRemoved";
             if($userId)
                 $SQL .= " AND CDFK_USUARIO = :userId";
-            $SQL .= " ORDER BY RAND(), SYS_DATE_PET_ADICIONADO_ADOCAO_USUARIO DESC";
+            $SQL .= " ORDER BY RAND()";
             if(!$userId)
                 $SQL .= " LIMIT 4";
             $stmt = $conn->prepare($SQL);

@@ -63,14 +63,18 @@
                     <h1>Minha lista de pets!</h1>
                     <?php
                         $myPets = AnimalEstimacao::retornarPets($usuario->getCode());
-                        foreach ($myPets as $myPet) { ?>
-                            <div class="card">
-                                <a href="petInformation.php?petValue=<?php echo $myPet->getCode(); ?>">
-                                <img src="<?php echo $myPet->getCaminhoFoto(); ?>"/>
-                                <p><?php echo $myPet->getNome().", ".$myPet->getIdade(); ?></p>
-                                </a>
-                            </div>
-                    <?php } ?>
+                        if(!empty($myPets)){
+                            foreach ($myPets as $myPet) { ?>
+                                <div class="card">
+                                    <a href="petInformation.php?petValue=<?php echo $myPet->getCode(); ?>">
+                                    <img src="<?php echo $myPet->getCaminhoFoto(); ?>"/>
+                                    <p><?php echo $myPet->getNome().", ".$myPet->getIdade(); ?></p>
+                                    </a>
+                                </div>
+                        <?php }
+                            }
+                            else echo "<p style='color: #fff; font-family: Source Sans Pro;'>Nenhum animal encontrado. Porque não registra um?</p>";
+                        ?>
                     <div class="clear"></div>
                 </div>
             </article>
