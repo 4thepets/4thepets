@@ -16,8 +16,9 @@
         private $emailDono;
         private $endDono;
         private $telDono;
+        private $keyDono;
 
-        public function __construct($code, $nome, $categoria, $genero, $idade, $castracao, $caminhoFoto, $nomeDono = null, $emailDono = null, $endDono = null, $telDono = null){
+        public function __construct($code, $nome, $categoria, $genero, $idade, $castracao, $caminhoFoto, $nomeDono = null, $emailDono = null, $endDono = null, $telDono = null, $keyDono = null){
             parent::__construct($code);
             $this->nome = $nome;
             $this->categoria = $categoria;
@@ -29,6 +30,7 @@
             $this->emailDono = $emailDono;
             $this->endDono = $endDono;
             $this->telDono = $telDono;
+            $this->keyDono = $keyDono;
         }
 
         public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $generoAnimal, $idadeAnimal, $castrado, $caminhoFoto, $userId){
@@ -76,18 +78,22 @@
             }
         }
 
-        public static function retornarPets($userId){
+        public static function retornarPets($userId = false){
             $petsArray = array();
             $isRemoved = false;
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL  = " SELECT * FROM ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
-            $SQL .= " WHERE CDFK_USUARIO = :userId";
-            $SQL .= " AND SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :isRemoved";
-            $SQL .= " ORDER BY SYS_DATE_PET_ADICIONADO_ADOCAO_USUARIO DESC";
+            $SQL .= " WHERE SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :isRemoved";
+            if($userId)
+                $SQL .= " AND CDFK_USUARIO = :userId";
+            $SQL .= " ORDER BY RAND(), SYS_DATE_PET_ADICIONADO_ADOCAO_USUARIO DESC";
+            if(!$userId)
+                $SQL .= " LIMIT 4";
             $stmt = $conn->prepare($SQL);
-            $stmt->bindParam(":userId", $userId);
             $stmt->bindParam(":isRemoved", $isRemoved);
+            if($userId)
+                $stmt->bindParam(":userId", $userId);
             if($stmt->execute()){
                 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($data as $row) {
@@ -98,7 +104,12 @@
                         $row['GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO'],
                         $row['NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO'],
                         $row['BOOL_CASTRACAO_PET_ADICIONADO_ADOCAO_USUARIO'],
-                        $row['IMAG_PET_ADICIONADO_ADOCAO_USUARIO']);
+                        $row['IMAG_PET_ADICIONADO_ADOCAO_USUARIO'],
+                        null,
+                        null,
+                        null,
+                        null,
+                        $row['CDFK_USUARIO']);
                 }
             }
             return $petsArray;
@@ -108,7 +119,8 @@
 
         }
 
-        public function retornaPetAdotadoInfo($petId, $userId){
+        public function retornaPetAdotadoInfo($petId){
+            $animalEstimacao = false;
             $isRemoved = false;
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -123,15 +135,14 @@
             $SQL .= " u.NAME_USUARIO,";
             $SQL .= " u.NAME_EMAIL_USUARIO,";
             $SQL .= " u.NAME_ENDERECO_USUARIO,";
-            $SQL .= " u.NBR_TELEFONE_USUARIO";
+            $SQL .= " u.NBR_TELEFONE_USUARIO,";
+            $SQL .= " p.CDFK_USUARIO";
             $SQL .= " FROM ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO p";
             $SQL .= " JOIN ".$conn->getDbName().".TB_USUARIO u ON p.CDFK_USUARIO = u.CODE_USUARIO";
-            $SQL .= " WHERE CDFK_USUARIO = :userId";
-            $SQL .= " AND CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
+            $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $SQL .= " AND SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :isRemoved";
             $SQL .= " ORDER BY SYS_DATE_PET_ADICIONADO_ADOCAO_USUARIO DESC";
             $stmt = $conn->prepare($SQL);
-            $stmt->bindParam(":userId", $userId);
             $stmt->bindParam(":petId", $petId);
             $stmt->bindParam(":isRemoved", $isRemoved);
             if($stmt->execute()){
@@ -148,7 +159,8 @@
                         $row['NAME_USUARIO'],
                         $row['NAME_EMAIL_USUARIO'],
                         $row['NAME_ENDERECO_USUARIO'],
-                        $row['NBR_TELEFONE_USUARIO']);
+                        $row['NBR_TELEFONE_USUARIO'],
+                        $row['CDFK_USUARIO']);
                 }
             }
             return $animalEstimacao;
@@ -276,13 +288,62 @@
             return $this->telDono;
         }
 
-        public function removeCadastro($petId){
+        public function getKeyDono(){
+            return $this->keyDono;
+        }
+
+        public static function removeCadastro($petId){
+            $true = true;
             $conn = new DatabaseConnection();
             $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET SYS_BOOL_PET_REMOVIDO_ADOCAO_USUARIO = :true";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);
-            $stmt->bindParam(":true", true);
+            $stmt->bindParam(":true", $true);
+            $stmt->bindParam(":petId", $petId);
+            if($stmt->execute())
+                return true;
+            else
+                throw new Exception(ExceptionTypeEnum::ERRO_INTERNO);
+        }
+
+        public function isAdopted($userId, $petId){
+            $conn = new DatabaseConnection();
+            $SQL  = " SELECT * FROM ".$conn->getDbName().".TB_PET_INTERESSE_ADOCAO_USUARIO";
+            $SQL .= " WHERE CDFK_USUARIO = :userId";
+            $SQL .= " AND CDFK_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam(":userId", $userId);
+            $stmt->bindParam(":petId", $petId);
+            if($stmt->execute()){
+                if($stmt->rowCount() > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public function cadastrarInteresse($userId, $petId){
+            $conn = new DatabaseConnection();
+            $SQL  = " INSERT INTO ".$conn->getDbName().".TB_PET_INTERESSE_ADOCAO_USUARIO (";
+            $SQL .= " CDFK_USUARIO, CDFK_PET_ADICIONADO_ADOCAO_USUARIO)";
+            $SQL .= " VALUES (:userId, :petId)";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam(":userId", $userId);
+            $stmt->bindParam(":petId", $petId);
+            if($stmt->execute())
+                return true;
+            else
+                throw new Exception(ExceptionTypeEnum::ERRO_INTERNO);
+        }
+
+        public function removerInteresse($userId, $petId){
+            $conn = new DatabaseConnection();
+            $SQL  = " DELETE FROM ".$conn->getDbName().".TB_PET_INTERESSE_ADOCAO_USUARIO";
+            $SQL .= " WHERE CDFK_USUARIO = :userId";
+            $SQL .= " AND CDFK_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
+            $stmt = $conn->prepare($SQL);
+            $stmt->bindParam(":userId", $userId);
             $stmt->bindParam(":petId", $petId);
             if($stmt->execute())
                 return true;

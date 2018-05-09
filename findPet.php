@@ -9,9 +9,9 @@
     else
         header("location: index.php");
 
-    if(isset($_POST['animalRegister'])){
+    if(isset($_POST['searchPets'])){
         try{
-            if(AnimalEstimacao::efetuarCadastro($_POST['animalName'], $_POST['animalCategory'], $_POST['animalGender'], $_POST['animalAge'], $_POST['animalCast'], $_FILES['animalImage'], $usuario->getCode()))
+            if($array = AnimalEstimacao::buscarPets($_POST[]))
                 $STATUS_MESSAGE = "Cadastrado com sucesso!";
         }catch(Exception $e){
             $STATUS_MESSAGE = $e->getMessage();
@@ -64,14 +64,14 @@
                         ?>
                     </select><br/><br>
                     <label for="animalGender" class="subtitle">Selecione o Gênero</label><br>
-                    <input type="radio" name="animalGender" value="<?php echo GeneroEnum::MACHO; ?>" required class="option-input"/><?php echo GeneroEnum::MACHO; ?><p></p><br>
-                    <input type="radio" name="animalGender" value="<?php echo GeneroEnum::FEMEA; ?>" required class="option-input"/><?php echo GeneroEnum::FEMEA; ?><br/><br><br>
+                    <input type="radio" name="animalGender" value="<?php echo GeneroEnum::MACHO; ?>" class="option-input"/><?php echo GeneroEnum::MACHO; ?><p></p><br>
+                    <input type="radio" name="animalGender" value="<?php echo GeneroEnum::FEMEA; ?>" class="option-input"/><?php echo GeneroEnum::FEMEA; ?><br/><br><br>
                     <label for="animalCast" class="subtitle">Ele é castrado?</label><br>
-                    <input type="radio" name="animalCast" value="y" required class="option-input"/>Sim <p></p><br>
-                    <input type="radio" name="animalCast" value="n" required class="option-input"/>Não<br/><br><br>
-                     <label for="animalName" class="subtitle">Digite um nome. "Muca, não gostei deste campo nesta tela, parece fora de contexto"</label><br>
-                    <input type="text" name="animalName" required placeholder="Digite um nome."/><br/><br>
-                    <input type="submit" name="" value="Buscar" class="botao"/><br><br><br>
+                    <input type="radio" name="animalCast" value="y" class="option-input"/>Sim <p></p><br>
+                    <input type="radio" name="animalCast" value="n" class="option-input"/>Não<br/><br><br>
+                     <label for="animalName" class="subtitle">Sabe o nome do pet que procura? Digite-o abaixo!</label><br>
+                    <input type="text" name="animalName" placeholder="Digite o nome do pet."/><br/><br>
+                    <input type="submit" name="searchPets" value="Buscar" class="botao"/><br><br><br>
                 </form>
                 </div>
             </article>

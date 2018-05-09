@@ -258,7 +258,7 @@ ajeitando a pagina de informação de pets com imagem"*/
 }
 
 /* Botão removerPet */
-.removePet, .editPet{
+.removePet, .editPet, .adoptPet{
   position: relative;
   text-decoration: none;
   padding: 1% 2%;
@@ -280,6 +280,13 @@ ajeitando a pagina de informação de pets com imagem"*/
 .editPet:hover{
   color: #013243;
   background: #FFF;
+  transition: .15s ease-in;
+  cursor: pointer;
+}
+
+.adoptPet:hover{
+  color: #FFF;
+  background: #2ECC71;
   transition: .15s ease-in;
   cursor: pointer;
 }

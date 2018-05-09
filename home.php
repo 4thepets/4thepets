@@ -1,5 +1,6 @@
 <?php
     include_once "model/Usuario.php";
+    include_once "model/AnimalEstimacao.php";
     session_start();
     if($_SESSION['USUARIO'])
         $usuario = unserialize($_SESSION['USUARIO']);
@@ -61,42 +62,17 @@
                 </div>
                 <div class="pageContentPets">
                     <h1>Conheça alguns amigos!</h1>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/02.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/03.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/sample/default.png"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
-                    <div class="card">
-                        <img src="images/bkg/01.jpg"/>
-                        <p>Leko, 15</p>
-                    </div>
+                    <?php
+                        $myPets = AnimalEstimacao::retornarPets();
+                        foreach ($myPets as $myPet) { 
+                            if($myPet->getKeyDono() != $usuario->getCode()){?>
+                            <div class="card">
+                                <a href="petInformation.php?petValue=<?php echo $myPet->getCode(); ?>">
+                                <img src="<?php echo $myPet->getCaminhoFoto(); ?>"/>
+                                <p><?php echo $myPet->getNome().", ".$myPet->getIdade(); ?></p>
+                                </a>
+                            </div>
+                    <?php }} ?>
                     <div class="clear"></div>
                 </div>
             </article>
