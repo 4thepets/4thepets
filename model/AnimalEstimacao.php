@@ -42,7 +42,13 @@
             
             $castrado = $castrado == "y" ? true : false;
 
-            if($caminhoFoto = self::atualizarImagem($caminhoFoto)){
+            try{
+                $caminhoFoto = self::atualizarImagem($caminhoFoto);
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());
+            }
+
+            if($caminhoFoto){
                 $removido = false;
                 $conn = new DatabaseConnection();
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
