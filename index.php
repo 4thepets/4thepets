@@ -92,7 +92,7 @@
 					<p>Acesse nossa plataforma e faça novos amigos!</p>
 				</figure>				
                 <div class="readMore">
-                    <a href="#">Leia mais</a>
+                    <a href="about2.php">Sobre a equipe</a>
                 </div>
 			</article>
 		</section>

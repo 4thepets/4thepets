@@ -1,0 +1,193 @@
+/*css marjo addPets*/
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Kalam');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 16px;
+    background-size: 100%;
+    background-attachment: fixed;    
+
+}
+
+.pageorg{
+    width: 100%;    
+    position: relative;
+    padding-top: 66px;
+    text-align: center; 
+    color: #FFF;
+}
+.img{ 
+    width: 10%;
+    position: relative;
+    /*border-radius: 10000px;*/
+}
+
+.img:hover{
+   transform: scale(1.4);
+    transition: .50s ease;
+}
+
+.title{
+    font-family: 'Source Sans Pro';
+    color: #FFF;
+    font-size: 2.7em;
+    font-weight: normal;
+
+    
+}
+
+.subtitle{
+    margin: 2% 0 0 0;
+    font-family: 'Source Sans Pro';
+    color: #FFF;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+
+
+
+.subsubtitle{
+   margin: 2% 0 0 0;
+    font-family: 'Source Sans Pro';
+    color: #FFF;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+
+.subsubtitle2{
+   margin: 2% 0 0 0;
+    font-family: 'Source Sans Pro';
+    color: #FFF;
+    font-size: 1.1em;
+    text-align: left;
+}
+
+
+
+.botao {
+    color: #013243;
+    transition: .15s ease-in;
+    position: relative;
+    text-decoration: none;
+    padding: 0.6% 1%;
+    border: 1px solid #FFF;
+    color: #FFF;
+    background: transparent;
+    border-radius: 100px;
+    font-family: 'Source Sans Pro';
+    font-size: 0.9em;
+}
+
+.botao:hover {
+    background: #FFF;
+    color: #013243;
+    transition: .15s ease-in;
+    cursor: pointer;
+}
+
+/*
+ajeitando a pagina de informação de pets com imagem"*/
+
+
+.divorg{
+  width: 56%;  
+  margin-left: 385px;
+
+  position: relative;
+  margin-bottom: 5%;
+  text-align: left; 
+  color: #FFF;
+  
+
+  /*
+  width: 35%;  
+  float: left;
+
+  width: 49%;*/
+}
+
+.divorgimg{  
+  position: relative;
+  margin-left: 15%;
+  float: left;
+}
+
+.divorgimg img{
+  width: 150px;
+  height: auto;
+  position: relative;
+  border-radius: 10000px;
+}
+
+.textposition{
+  width: 69.5%;
+  margin-right: 15%;  
+  margin-left: 15%;
+  position: relative;
+  margin-bottom: 5%;
+  text-align: justify; 
+  color: #FFF;
+  
+
+ 
+
+/* 
+width: 62.5%;
+margin-right: 15%;
+
+width: 40%;  
+  margin-left: 15%;
+ 
+  position: relative;
+  margin-bottom: 5%;
+  text-align: justify; 
+  color: #FFF;
+
+
+  */
+ 
+
+}
+
+
+
+
+.filterOpacity{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: #000;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+..homeContent{
+    width: 100vw;
+    position: absolute;
+    overflow-y: scroll;
+}
+
+.clear{
+    clear: both;
+}
+
+
+
+
+/*
+tentando mexer so no conteudo da pag.
+
+background-attachment: fixed;
+    background-color: red;
+
+*/
+
