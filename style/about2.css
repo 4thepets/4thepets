@@ -100,15 +100,19 @@ ajeitando a pagina de informação de pets com imagem"*/
 
 .divorg{
   width: 56%;  
-  margin-left: 385px;
+  margin-left: 400px;
 
   position: relative;
   margin-bottom: 5%;
   text-align: left; 
   color: #FFF;
-  
+
 
   /*
+
+  margin-left: 385px;
+  
+
   width: 35%;  
   float: left;
 
