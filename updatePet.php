@@ -9,10 +9,25 @@
     else
         header("location: index.php");
 
+    if(!isset($_GET['petValue']))
+        header("location: home.php");
+
+    try{
+        if(!$animalEstimacao = AnimalEstimacao::retornaPetAdotadoInfo($_GET['petValue']))
+            header('location: home.php');
+        else
+            $STATUS_MESSAGE = "Dados alterados com sucesso.";
+    }catch(Exception $e){
+        $STATUS_MESSAGE = $e->getMessage();
+    }
+
+    if($animalEstimacao->getKeyDono() != $usuario->getCode())
+        header('location: home.php');
+
     if(isset($_POST['animalRegister'])){
         try{
-            if(AnimalEstimacao::efetuarCadastro($_POST['animalName'], $_POST['animalCategory'], $_POST['animalGender'], $_POST['animalAge'], $_POST['animalCast'], $_FILES['animalImage'], $usuario->getCode()))
-                $STATUS_MESSAGE = "Cadastrado com sucesso!";
+            $animalEstimacao->update($_POST['animalName'], $_POST['animalCategory'], $_POST['animalGender'], $_POST['animalAge'], $_POST['animalCast'], $_FILES['animalImage']);
+            $animalEstimacao = AnimalEstimacao::retornaPetAdotadoInfo($_GET['petValue']);
         }catch(Exception $e){
             $STATUS_MESSAGE = $e->getMessage();
         }
@@ -28,22 +43,23 @@
         <link rel="stylesheet" type="text/css" href="style/updatePet.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
-    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+    <body background="images/bkg/01.jpg">
         <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
+                    <p>Bem vindo, <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
                         if($_SERVER['PHP_SELF'] != "/home.php") 
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
-                    ?>                   
-                    <li><a href='myProfile.php'>Meu Perfil</a></li>
+                    ?>     
+                    <li><a href='findPet.php'>Encontre um amigo</a></li>              
+                    <li><a href='myProfile.php'>Configurações</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myInterestPets.php">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets que possuo interesse</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
@@ -52,27 +68,32 @@
                 <div class="pageorg">
                     <img  src="images/logo_4tp_white.png" class="img"/><br>
                 <h1 class="title">Alterar os dados do Pet</h1>
-                <p class="subtitle"><?php if(isset($STATUS_MESSAGE)) echo $STATUS_MESSAGE; else echo "Preencha o formulário abaixo para aterar os dados do animal."; ?></p><br/><br/>
+                <p class="subtitle"><?php if(isset($STATUS_MESSAGE)) echo $STATUS_MESSAGE; else echo "Altere os dados do formulário abaixo para alterar os dados que deseja."; ?></p><br/><br/>
                 <form method="post" enctype="multipart/form-data">
                     <label for="animalName" class="subtitle">Digite o nome do animal de estimação.</label><br>
-                    <input type="text" name="animalName" required placeholder="Digite um nome."/><br/><br>
+                    <input type="text" name="animalName" required value ="<?php echo $animalEstimacao->getNome(); ?>" placeholder="Digite um nome."/><br/><br>
                     <label for="animalCategory" class="subtitle">Selecione a categoria.</label><br>
                     <select name="animalCategory" required>
-                        <option>...</option>
+                        <option value="<?php echo $animalEstimacao->getCategoria(); ?>"><?php echo $animalEstimacao->getCategoria(); ?></option>
                         <?php
                             foreach (CategoriaEnum::getConstants() as $categoria) {
-                                echo "<option value=".$categoria.">".$categoria."</option>";
+                                if($animalEstimacao->getCategoria() != $categoria)
+                                    echo "<option value=".$categoria.">".$categoria."</option>";
                             }
                         ?>
                     </select><br/><br>
                     <label for="animalGender" class="subtitle">Selecione o Gênero</label><br>
-                    <input type="radio" name="animalGender" value="<?php echo GeneroEnum::MACHO; ?>" required class="option-input"/><?php echo GeneroEnum::MACHO; ?><p></p><br>
-                    <input type="radio" name="animalGender" value="<?php echo GeneroEnum::FEMEA; ?>" required class="option-input"/><?php echo GeneroEnum::FEMEA; ?><br/><br><br>
+                    <?php if($animalEstimacao->getGenero() == GeneroEnum::MACHO) $macho = "checked"; else $macho = ""; ?>
+                    <input type="radio" name="animalGender" <?php echo $macho; ?> value="<?php echo GeneroEnum::MACHO; ?>" required class="option-input"/><?php echo GeneroEnum::MACHO; ?><p></p><br>
+                    <?php if($animalEstimacao->getGenero() == GeneroEnum::FEMEA) $femea = "checked"; else $femea = ""; ?>
+                    <input type="radio" name="animalGender" <?php echo $femea; ?> value="<?php echo GeneroEnum::FEMEA; ?>" required class="option-input"/><?php echo GeneroEnum::FEMEA; ?><br/><br><br>
                     <label for="animalAge" class="subtitle">Digite a idade</label><br>
-                    <input type="number" name="animalAge" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" required/><br/><br>
+                    <input type="number" name="animalAge" value="<?php echo $animalEstimacao->getIdade(); ?>" required/><br/><br>
                     <label for="animalCast" class="subtitle">Ele é castrado?</label><br>
-                    <input type="radio" name="animalCast" value="y" required class="option-input"/>Sim <p></p><br>
-                    <input type="radio" name="animalCast" value="n" required class="option-input"/>Não<br/><br><br>
+                    <?php if($animalEstimacao->getCastracao() == "Sim") $checked = "checked"; else $checked = ""; ?>
+                    <input type="radio" name="animalCast" value="y" <?php echo $checked; ?> required class="option-input"/>Sim <p></p><br>
+                    <?php if($animalEstimacao->getCastracao() == "Não") $checked = "checked"; else $checked = ""; ?>
+                    <input type="radio" name="animalCast" value="n" <?php echo $checked; ?> required class="option-input"/>Não<br/><br><br>
                     <input type="file" name="animalImage" id="file" class="file-input" />
                     <label for="file">Selecione uma imagem (opcional)</label><br><br>
                     <input type="submit" name="animalRegister" value="atualizar dados do pet" class="botao"/><br><br><br>

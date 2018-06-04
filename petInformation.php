@@ -60,22 +60,23 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/script.js"></script>
 
-    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+    <body background="images/bkg/01.jpg">
         <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
+                    <p>Bem vindo, <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
                         if($_SERVER['PHP_SELF'] != "/home.php") 
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
-                    ?>                   
-                    <li><a href='myProfile.php'>Meu Perfil</a></li>
+                    ?>     
+                    <li><a href='findPet.php'>Encontre um amigo</a></li>               
+                    <li><a href='myProfile.php'>Configurações</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myInterestPets.php">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets que possuo interesse</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
@@ -90,19 +91,23 @@
                     </div>
                     <div class="divorg">
                         <p class="subsubtitle"><b>Nome:  </b><?php echo $animalEstimacao->getNome(); ?></p><br/>
+                        <p class="subsubtitle"><b>Categoria:  </b><?php echo $animalEstimacao->getCategoria(); ?></p><br/>
+                        <p class="subsubtitle"><b>Sexo:  </b><?php echo $animalEstimacao->getGenero(); ?></p><br/>
+                        <p class="subsubtitle"><b>Este animal possui </b><?php echo $animalEstimacao->getIdade(); ?> anos.</p><br/>
+                        <p class="subsubtitle"><b>É castrado?:  </b><?php echo $animalEstimacao->getCastracao(); ?></p><br/>
                         <p class="subsubtitle"><b>Dono:  </b><?php echo $animalEstimacao->getNomeDono(); ?></p><br/>
-                        <p class="subsubtitle"><b>Endereço: </b><?php if($animalEstimacao->getEndDono() == null) echo "Não definido pelo usuário."; else echo $animalEstimacao->getEndDono(); ?></p><br/>
-                        <p class="subsubtitle"><b>Tefefone: </b><?php if($animalEstimacao->getTelDono() == null) echo "Não definido pelo usuário."; else echo $animalEstimacao->getTelDono(); ?></p><br/>
-                        <p class="subsubtitle"><b>Email do Dono: </b><?php echo $animalEstimacao->getEmailDono(); ?></p><br/>
+                        <p class="subsubtitle"><b>Endereço:  </b><?php if($animalEstimacao->getEndDono() == null) echo "Não definido pelo usuário."; else echo $animalEstimacao->getEndDono(); ?></p><br/>
+                        <p class="subsubtitle"><b>Tefefone:  </b><?php if($animalEstimacao->getTelDono() == null) echo "Não definido pelo usuário."; else echo $animalEstimacao->getTelDono(); ?></p><br/>
+                        <p class="subsubtitle"><b>Email do Dono:  </b><?php echo $animalEstimacao->getEmailDono(); ?></p><br/>
                         <?php 
                             if($usuario->getCode() == $animalEstimacao->getKeyDono()){ ?>
                                 <form method="post">
                                     <input type="submit" name="petRemove" value="Remover Pet" class="removePet"/>
-                                    <a href="updatePet.php" class="editPet">Alterar dados</a>
+                                    <a href="updatePet.php?petValue=<?php echo $animalEstimacao->getCode(); ?>" class="editPet">Alterar dados</a>
                                 </form>
                         <?php } else if(!$animalEstimacao->isAdopted($usuario->getCode(), $animalEstimacao->getCode())) { ?>
                             <form method="post">
-                                <input type="submit" name="markPet" value="Adotar Pet" class="adoptPet"/>
+                                <input type="submit" name="markPet" value="Registrar Interesse" class="adoptPet"/>
                             </form>
                         <?php } else { ?>
                             <form method="post">

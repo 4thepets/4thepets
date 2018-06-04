@@ -1,7 +1,7 @@
 <?php
     include_once 'db/DatabaseConnection.php';
     include_once 'model/ObjectConfig.php';
-    include_once 'enumeration/ExceptionTypeEnum.php';
+    include_once 'model/Pigeon/PigeonService.php';
     
     Class Usuario extends ObjectConfig{
         private $nome;
@@ -20,8 +20,14 @@
         }
         
         public static function efetuarCadastro($nomeUsuario, $emailUsuario, $senhaUsuario, $senhaConfirmacao){
-            $emailUsuario = self::validarEmail($emailUsuario);
-            $senhaUsuario = self::validarSenha($senhaUsuario, $senhaConfirmacao);
+            try{
+                $nomeUsuario = Pigeon::validate(PigeonClass::USER, PigeonMethodType::NAME, $nomeUsuario);
+                $emailUsuario = Pigeon::validate(PigeonClass::USER, PigeonMethodType::EMAIL, $emailUsuario);
+                $senhaUsuario = Pigeon::validate(PigeonClass::USER, PigeonMethodType::PASSWORD, array($senhaUsuario, $senhaConfirmacao));
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());
+            }
+
             // TEMPORÁRIO 
             $caminhoFoto = "images/sample/default.png";
             $conn = new DatabaseConnection();
@@ -68,77 +74,49 @@
                 throw new Exception(ExceptionTypeEnum::ERRO_DADOS_INCORRETOS_LOGIN);
         }
 
-        public function alterarNome($nome){
+        public function alterarNome($nomeUsuario){
+            $nomeUsuario = Pigeon::validate(PigeonClass::USER, PigeonMethodType::NAME, $nomeUsuario);
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NAME_USUARIO = :nome WHERE CODE_USUARIO = :userId";
             $stmt = $conn->prepare($SQL);
-            $stmt->bindParam("nome", $nome);
+            $stmt->bindParam("nome", $nomeUsuario);
             $stmt->bindParam("userId", $this->code);
             if($stmt->execute()){
-                $this->nome = $nome;
+                $this->nome = $nomeUsuario;
                 return true;
             }else
                 throw new Exception(ExceptionTypeEnum::ERRO_NOME_INVALIDO);
         }
 
-        public function alterarEmail($email){
-            $email = self::validarEmail($email);
+        public function alterarEmail($emailUsuario){
+            $emailUsuario = Pigeon::validate(PigeonClass::USER, PigeonMethodType::EMAIL, $emailUsuario);
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NAME_EMAIL_USUARIO = :email WHERE CODE_USUARIO = :userId";
             $stmt = $conn->prepare($SQL);
-            $stmt->bindParam("email", $email);
+            $stmt->bindParam("email", $emailUsuario);
             $stmt->bindParam("userId", $this->code);
             if($stmt->execute()){
-                $this->email = $email;
+                $this->email = $emailUsuario;
                 return true;
             }
         }
 
-        public function alterarSenha($senha, $senhaConfirmacao){
-            $senha = self::validarSenha($senha, $senhaConfirmacao);
+        public function alterarSenha($senhaUsuario, $senhaConfirmacao){
+            $senhaUsuario = Pigeon::validate(PigeonClass::USER, PigeonMethodType::PASSWORD, array($senhaUsuario, $senhaConfirmacao));
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET CODE_SENHA_USUARIO = :senha WHERE CODE_USUARIO = :userId";
             $stmt = $conn->prepare($SQL);
-            $stmt->bindParam("senha", $senha);
+            $stmt->bindParam("senha", $senhaUsuario);
             $stmt->bindParam("userId", $this->code);
             if($stmt->execute())
                 return true;
         }
 
-        private function validarEmail($emailUsuario){
-            if(is_null($emailUsuario))
-                throw new Exception(ExceptionTypeEnum::ERRO_EMAIL_NULO_CADASTRO);
-            
-            if(!filter_var($emailUsuario, FILTER_VALIDATE_EMAIL))
-                throw new Exception(ExceptionTypeEnum::ERRO_EMAIL_CADASTRO);
-            
-            $conn = new DatabaseConnection();
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $conn->prepare("SELECT NAME_EMAIL_USUARIO FROM ".$conn->getDbName().".TB_USUARIO WHERE NAME_EMAIL_USUARIO = :userEmail");
-            $stmt->bindParam(":userEmail", $emailUsuario);
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            if($result)
-                throw new Exception(ExceptionTypeEnum::ERRO_EMAIL_EXISTENTE_CADASTRO);
-            else
-                return $emailUsuario;
-        }
-
-        private function validarSenha($senhaUsuario, $senhaConfirmacao){
-            if(is_null($senhaUsuario) || is_null($senhaConfirmacao))
-                throw new Exception(ExceptionTypeEnum::ERRO_SENHA_NULA_CADASTRO);
-            
-            if($senhaUsuario == $senhaConfirmacao){
-                return md5($senhaUsuario);
-            }else{
-                throw new Exception(ExceptionTypeEnum::ERRO_VALIDACAO_SENHA_CADASTRO);
-            }   
-        }
-
         public function alterarEndereco($endereco){
+            $endereco = Pigeon::validate(PigeonClass::USER, PigeonMethodType::ADDRESS, $endereco);
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NAME_ENDERECO_USUARIO = :endereco WHERE CODE_USUARIO = :userId";
@@ -153,6 +131,7 @@
         }
 
         public function alterarTelefone($telefone){
+            $endereco = Pigeon::validate(PigeonClass::USER, PigeonMethodType::TELEPHONE, $telefone);
             $conn = new DatabaseConnection();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL = "UPDATE ".$conn->getDbName().".TB_USUARIO SET NBR_TELEFONE_USUARIO = :telefone WHERE CODE_USUARIO = :userId";

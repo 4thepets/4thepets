@@ -65,13 +65,14 @@ body{
 
 .homeContent .menuContent ul li{
     display: block;
-    line-height: 2em;
+    line-height: 1.6em;
 }
 
 .homeContent .menuContent ul li a{
     color: #FFF;
     text-decoration: none;
     display: block;
+    font-size: 0.875em;
 }
 
 .homeContent .menuContent ul li a:hover{

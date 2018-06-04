@@ -9,7 +9,8 @@
     if(isset($_POST['tempChangeName'])){
         try{
             if($usuario->alterarNome($_POST['tempName'])){
-                $SUCESS_MESSAGE = "Sucesso";
+                $SUCESS_MESSAGE = true;
+                $STATUS_MESSAGE = "Alterado com sucesso.";
                 $_SESSION['USUARIO'] = serialize($usuario);
             }
         }catch(Exception $e){
@@ -27,22 +28,23 @@
         <link rel="stylesheet" type="text/css" href="style/tempProfileName.css"/>
         <title>Alterar Nome</title>
     </head>
-    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+    <body background="images/bkg/01.jpg">
         <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p><?php if(isset($SUCESS_MESSAGE)) echo "Alterado para: ".$usuario->getNome(); else echo "Bem vindo ".$usuario->getNome();?>!</p>
+                    <p><?php if(isset($SUCESS_MESSAGE)) echo "Alterado para: ".$usuario->getNome(); else echo "Bem vindo, ".$usuario->getNome();?>!</p>
                 </figure>
                 <ul>
                     <?php 
                         if($_SERVER['PHP_SELF'] != "/home.php") 
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
-                    ?>                   
-                    <li><a href='myProfile.php'>Meu Perfil</a></li>
+                    ?>         
+                    <li><a href='findPet.php'>Encontre um amigo</a></li>            
+                    <li><a href='myProfile.php'>Configurações</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myInterestPets.php">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets que possuo interesse</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
@@ -51,12 +53,13 @@
                 <div class="pageorg">
                      <img class="img" src="images/logo_4tp_white.png"/>
                	    <form method="post">
-                        <label for="tempName" class="title">Alterar Nome</label>
                         <?php
                             if(isset($STATUS_MESSAGE))
-                                echo "<p>".$STATUS_MESSAGE."</p>";
-                            else
+                                echo "<label for='tempName' class='title'>".$STATUS_MESSAGE."</label><br/>";
+                            else{
+                                echo "<label for='tempName' class='title'>Alterar Nome</label>";
                                 echo "<p>Insira um nome válido.</p>";
+                            }
                         ?>
                		    <input type="text" name="tempName" required placeholder="Digite um novo nome"/><br><br>
                		    <input type="submit" name="tempChangeName" value="Alterar Nome" class="botao"/>

@@ -42,6 +42,15 @@
     	<script src="js/jquery-3.3.1.min.js"></script>
     	<script src="js/script.js"></script>
 	</head>
+	<?php if(isset($registerMessage)) { ?>
+		<script>
+			$(document).ready(function(){
+				$("#menuToggle").removeAttr('style');
+        		$("#menuToggle").animate({bottom: '0'}, "slow");
+			});
+		</script>
+	<?php } ?>
+	
 	<script> 
 		$(document).ready(function(){
     		$("#userRegister").click(function(){
@@ -92,7 +101,7 @@
 					<p>Acesse nossa plataforma e faça novos amigos!</p>
 				</figure>				
                 <div class="readMore">
-                    <a href="about2.php">Sobre a equipe</a>
+                    <a href="aboutUs.php">Sobre a equipe</a>
                 </div>
 			</article>
 		</section>

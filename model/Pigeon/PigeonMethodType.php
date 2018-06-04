@@ -9,6 +9,8 @@
         const EMAIL = "Email";
         const CPF = "Cpf";
         const PASSWORD = "Password";
+        const ADDRESS = "Address";
+        const TELEPHONE = "Telephone";
         
         //AnimalEstimacao
         const AGE = "Age";

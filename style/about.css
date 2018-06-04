@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 16px;
+    background-size: 100%;
+    background-attachment: fixed;
+}
+.filterOpacity{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: #000;
+    opacity: 0.8;
+    z-index: -1;
+}
+.pageContent{
+    width: 100%;
+    position: relative;
+    margin-bottom: 5%;
+}
+.pageContent figure{
+    width: 100%;
+    padding: 10vh 0 5vh 0;
+    margin: 0 0 5% 0;
+    position: relative;
+}
+.pageContent figure img{
+    width: 10%;
+    position: relative;
+    left: 50%;
+    margin-left: -5%;
+}
+.pageContent figure img:hover{
+    transform: scale(1.3);
+    transition: .30s ease;
+}
+.pageContent figure figcaption{
+    text-align: center;
+    font-family: 'Source Sans Pro';
+    color: #FFF;
+    font-size: 2.7rem;
+}
+.pageContent figure p{
+    text-align: center;
+    color: #FFF;
+    font-size: 1.1em;
+}
+.pageContent .visions, .developers{
+    width: 90vw;
+    position: relative;
+}
+.visions{
+    margin: 2% 0 2% 5vw;
+}
+.developers{
+    margin: 8% 0 0 5vw;
+}
+.visions .vision, .developers .developer{
+    position: relative;
+    float: left;
+    border: 1px solid #FFF;
+    border-radius: 6px;
+}
+.vision{
+    width: 31%;
+    margin: 0 1.16% 0 1.16%;
+}
+.vision img{
+    width: 20%;
+    left: 50%;
+    margin-top: -15%;
+    margin-left: -10%;
+    position: relative;
+    background: none;
+}
+.vision h1{
+    text-align: center;
+    color: #FFF;
+    font-family: 'Source Sans Pro';
+    font-size: 1.5em;
+    padding: 1% 0 3% 0;
+}
+.vision p{
+    padding: 0 5% 3% 5%;
+    text-align: center;
+    font-family: 'Lato';
+    font-size: 1em;
+    color: #FFF;
+}
+.developer{
+    width: 48%;
+    margin: 0 1% 0 1%;
+}
+.developer img{
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -10%;
+    border-radius: 10000px;
+    position: relative;
+    border: 2px solid #FFF;
+}
+.developer img:hover{
+    transform: scale(1.5);
+    transition: .30s ease;
+}
+.developer h1{
+    text-align: center;
+    color: #FFF;
+    font-family: 'Source Sans Pro';
+    font-size: 1.5em;
+    padding: 1% 0 3% 0;
+}
+.developer p{
+    padding: 0 2% 3% 2%;
+    text-align: justify;
+    font-family: 'Lato';
+    font-size: 1em;
+    color: #FFF;
+}
+.developer i{
+    color: #FFF;
+    font-size: 36px;
+    margin: 1%;
+    position: relative;
+}
+
+.clear{
+    clear: both;
+}

@@ -28,22 +28,23 @@
         <link rel="stylesheet" type="text/css" href="style/addPets.css"/>
         <title>4thePets - Juntando grandes amigos</title>
     </head>
-    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+    <body background="images/bkg/01.jpg">
         <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
+                    <p>Bem vindo, <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
                         if($_SERVER['PHP_SELF'] != "/home.php") 
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
                     ?>                   
-                    <li><a href='myProfile.php'>Meu Perfil</a></li>
+                    <li><a href='findPet.php'>Encontre um amigo</a></li>  
+                    <li><a href='myProfile.php'>Configurações</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myInterestPets.php">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets que possuo interesse</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
@@ -69,7 +70,7 @@
                     <input type="radio" name="animalGender" value="<?php echo GeneroEnum::MACHO; ?>" required class="option-input"/><?php echo GeneroEnum::MACHO; ?><p></p><br>
                     <input type="radio" name="animalGender" value="<?php echo GeneroEnum::FEMEA; ?>" required class="option-input"/><?php echo GeneroEnum::FEMEA; ?><br/><br><br>
                     <label for="animalAge" class="subtitle">Digite a idade</label><br>
-                    <input type="number" name="animalAge" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" required/><br/><br>
+                    <input type="number" name="animalAge" required/><br/><br>
                     <label for="animalCast" class="subtitle">Ele é castrado?</label><br>
                     <input type="radio" name="animalCast" value="y" required class="option-input"/>Sim <p></p><br>
                     <input type="radio" name="animalCast" value="n" required class="option-input"/>Não<br/><br><br>

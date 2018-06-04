@@ -9,7 +9,7 @@
     if(isset($_POST['tempChangePassword'])){
         try{
             if($usuario->alterarSenha($_POST['tempPassword'], $_POST['tempPasswordConfirm']))
-                $STATUS_MESSAGE = "Sucesso";
+                $STATUS_MESSAGE = "Alterado com sucesso.";
         }catch(Exception $e){
             $STATUS_MESSAGE = $e->getMessage();
         }    
@@ -26,22 +26,23 @@
          <link rel="stylesheet" type="text/css" href="style/tempProfilePassword.css"/>
         <title>Alterar Senha</title>
     </head>
-    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+    <body background="images/bkg/01.jpg">
         <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                   <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
+                   <p>Bem vindo, <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
                         if($_SERVER['PHP_SELF'] != "/home.php") 
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
-                    ?>                   
-                    <li><a href='myProfile.php'>Meu Perfil</a></li>
+                    ?>      
+                    <li><a href='findPet.php'>Encontre um amigo</a></li>            
+                    <li><a href='myProfile.php'>Configurações</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myInterestPets.php">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets que possuo interesse</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
@@ -52,9 +53,11 @@
                	<form method="post">
                        <?php
                             if(isset($STATUS_MESSAGE))
-                                echo "<label for='tempPassword' class='title'>".$STATUS_MESSAGE."</label>";
-                            else
+                                echo "<label for='tempPassword' class='title'>".$STATUS_MESSAGE."</label><br/>";
+                            else{
                                 echo "<label for='tempPassword' class='title'>Alterar Senha</label>";
+                                echo "<p>Insira uma senha válida.</p>";
+                            }
                         ?>
                     <br/><label for="password" class="subtitle">Digite uma nova senha.</label><br/>
                		<input type="password" name="tempPassword" required/><br/>

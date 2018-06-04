@@ -10,7 +10,7 @@
         <title>4thePets - Juntando grandes amigos</title>
     </head>
 
-    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+    <body background="images/bkg/01.jpg">
         <div class="filterOpacity"></div>
         <section class="homeContent">
             <!-- Page Content -->

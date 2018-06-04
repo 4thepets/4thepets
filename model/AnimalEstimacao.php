@@ -4,6 +4,7 @@
     include_once 'enumeration/ExceptionTypeEnum.php';
     include_once 'enumeration/CategoriaEnum.php';
     include_once 'enumeration/GeneroEnum.php';
+    include_once 'model/Pigeon/PigeonService.php';
     
     Class AnimalEstimacao extends ObjectConfig{
         private $nome;
@@ -34,13 +35,11 @@
         }
 
         public function efetuarCadastro($nomeAnimal, $categoriaAnimal, $generoAnimal, $idadeAnimal, $castrado, $caminhoFoto, $userId){
-            if(!CategoriaEnum::isValidValue($categoriaAnimal))
-                throw new Exception(ExceptionTypeEnum::ERRO_CATEGORIA);
-
-            if(!GeneroEnum::isValidValue($generoAnimal))
-                throw new Exception(ExceptionTypeEnum::ERRO_GENERO);
-            
-            $castrado = $castrado == "y" ? true : false;
+            $nomeAnimal = Pigeon::validate(PigeonClass::PET, PigeonMethodType::NAME, $nomeAnimal);
+            $categoriaAnimal = Pigeon::validate(PigeonClass::PET, PigeonMethodType::CATEGORY, $categoriaAnimal);
+            $generoAnimal = Pigeon::validate(PigeonClass::PET, PigeonMethodType::GENDER, $generoAnimal);
+            $idadeAnimal = Pigeon::validate(PigeonClass::PET, PigeonMethodType::AGE, $idadeAnimal);
+            $castrado = Pigeon::validate(PigeonClass::PET, PigeonMethodType::CASTRATED, $castrado);
 
             try{
                 $caminhoFoto = self::atualizarImagem($caminhoFoto);
@@ -212,12 +211,27 @@
             return $animalEstimacao;
         }
 
+        public function update($nomeAnimal, $categoriaAnimal, $generoAnimal, $idadeAnimal, $castrado, $caminhoFoto){
+            try{
+                self::setNome($this->getCode(), $nomeAnimal);
+                self::setCategoria($this->getCode(), $categoriaAnimal);
+                self::setGenero($this->getCode(), $generoAnimal);
+                self::setIdade($this->getCode(), $idadeAnimal);
+                self::setCastracao($this->getCode(), $castrado);
+                if(isset($caminhoFoto['name']))
+                    self::setCaminhoFoto($this->getCode(), $caminhoFoto);
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());
+            }
+        }
+
         // GETS & SETS
         public function getNome(){
             return $this->nome;
         }
     
         public function setNome($petId, $nome){
+            $nome = Pigeon::validate(PigeonClass::PET, PigeonMethodType::NAME, $nome);
             $conn = new DatabaseConnection();
             $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET NAME_PET_ADICIONADO_ADOCAO_USUARIO = :nome";
@@ -236,15 +250,13 @@
         }
     
         public function setCategoria($petId, $categoria){
-            if(!CategoriaEnum::isValidValue($categoria))
-                throw new Exception(ExceptionTypeEnum::ERRO_CATEGORIA);
-            
+            $categoria = Pigeon::validate(PigeonClass::PET, PigeonMethodType::CATEGORY, $categoria);
             $conn = new DatabaseConnection();
             $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET NAME_CATEGORIA_PET_ADICIONADO_ADOCAO_USUARIO = :categoria";
             $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
             $stmt = $conn->prepare($SQL);
-            $stmt->bindParam(":nome", $categoria);
+            $stmt->bindParam(":categoria", $categoria);
             $stmt->bindParam(":petId", $petId);
             if($stmt->execute())
                 return true;
@@ -257,9 +269,7 @@
         }
     
         public function setGenero($petId, $genero){
-            if(!GeneroEnum::isValidValue($genero))
-                throw new Exception(ExceptionTypeEnum::ERRO_GENERO);
-            
+            $genero = Pigeon::validate(PigeonClass::PET, PigeonMethodType::GENDER, $genero);
             $conn = new DatabaseConnection();
             $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET GNR_SEXO_PET_ADICIONADO_ADOCAO_USUARIO = :genero";
@@ -278,6 +288,7 @@
         }
     
         public function setIdade($petId, $idade){
+            $idade = Pigeon::validate(PigeonClass::PET, PigeonMethodType::AGE, $idade);
             $conn = new DatabaseConnection();
             $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
             $SQL .= " SET NBR_IDADE_PET_ADICIONADO_ADOCAO_USUARIO = :idade";
@@ -292,7 +303,10 @@
         }
     
         public function getCastracao(){
-            return $this->castracao;
+            if($this->castracao == 0)
+                return "Não";
+            else
+                return "Sim";
         }
     
         public function setCastracao($petId, $castracao){
@@ -313,9 +327,26 @@
             return $this->caminhoFoto;
         }
     
-        public function setCaminhoFoto($caminhoFoto){
-            //alterar imagem
-            //if(self::alterarImagem($file))
+        public function setCaminhoFoto($petId, $caminhoFoto){
+            try{
+                $caminhoFoto = self::atualizarImagem($caminhoFoto);
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());
+            }
+
+            if($caminhoFoto){
+                $conn = new DatabaseConnection();
+                $SQL  = " UPDATE ".$conn->getDbName().".TB_PET_ADICIONADO_ADOCAO_USUARIO";
+                $SQL .= " SET IMAG_PET_ADICIONADO_ADOCAO_USUARIO = :caminhoFoto";
+                $SQL .= " WHERE CODE_PET_ADICIONADO_ADOCAO_USUARIO = :petId";
+                $stmt = $conn->prepare($SQL);
+                $stmt->bindParam(":caminhoFoto", $caminhoFoto);
+                $stmt->bindParam(":petId", $petId);
+                if($stmt->execute())
+                    return true;
+                else
+                    throw new Exception(ExceptionTypeEnum::ERRO_INTERNO);
+            }
         }
 
         public function getNomeDono(){

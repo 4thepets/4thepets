@@ -28,22 +28,23 @@
     <script src="https://npmcdn.com/minigrid@3.0.1/dist/minigrid.min.js"></script>
     <script src="js/script.js"></script>
 
-    <body background="images/bkg/0<?php echo rand(1, 5); ?>.jpg">
+    <body background="images/bkg/01.jpg">
         <div class="filterOpacity"></div>
         <section class="homeContent">
             <article class="menuContent">
                 <figure>
                     <img src="<?php echo $usuario->getCaminhoImagem(); ?>"/>
-                    <p>Bem vindo <?php echo $usuario->getNome(); ?>!</p>
+                    <p>Bem vindo, <?php echo $usuario->getNome(); ?>!</p>
                 </figure>
                 <ul>
                     <?php 
                         if($_SERVER['PHP_SELF'] != "/home.php") 
                             echo "<li><a href='home.php'>Página Inicial</a></li>";
                     ?>  
-                    <li><a href='myProfile.php'>Meu Perfil</a></li>
+                    <li><a href='findPet.php'>Encontre um amigo</a></li>  
+                    <li><a href='myProfile.php'>Configurações</a></li>
                     <li><a href="myPets.php">Meus Pets</a></li>
-                    <li><a href="myInterestPets.php">Pets interessados</a></li>
+                    <li><a href="myInterestPets.php">Pets que possuo interesse</a></li>
                     <li><a href="home.php?quit=true">Sair</a></li>
                 </ul>
             </article>
